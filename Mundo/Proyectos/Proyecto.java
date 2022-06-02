@@ -7,7 +7,8 @@ import Mundo.Actividades.Participante;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Proyecto implements Serializable{
+public class Proyecto implements Serializable
+{
     private String nombre;
     private String descripcion;
     private LocalDate fechaInicial;
@@ -24,7 +25,6 @@ public class Proyecto implements Serializable{
         participantes = new ArrayList<Participante>();
         Participante primerParticipante = new Participante(nombreParticipante, correoParticipante);
         participantes.add(primerParticipante);
-
     }
     
     public String getNombre()
@@ -66,10 +66,12 @@ public class Proyecto implements Serializable{
         this.fechaFinal = LocalDate.of(anio, mes, dia);
     }
 
-    public void setTiposActividad(ArrayList<String> tiposActividad) {
+    public void setTiposActividad(ArrayList<String> tiposActividad)
+    {
         this.tiposActividad = tiposActividad;
     }
 
-    public void setFechaFinal(LocalDate parse) {
+    public void setFechaFinal(LocalDate parse)
+    {
     }
 }
