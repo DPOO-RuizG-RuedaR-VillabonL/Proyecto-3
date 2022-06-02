@@ -91,7 +91,11 @@ public class PAgregarParticipante extends JPanel implements ActionListener{
             String nombre = rta1.getText();
             String correo = rta2.getText();
 
-            if (nombre.length()==0 || correo.length()==0){
+            if (!(correo.contains("@"))){
+                JOptionPane.showMessageDialog(panelCentral, "El correo debe contener @",
+				"Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (nombre.length()==0 || correo.length()==0){
                 JOptionPane.showMessageDialog(panelCentral, "Por favor escriba en todos los campos antes de continuar",
 				"Error", JOptionPane.INFORMATION_MESSAGE);
             }

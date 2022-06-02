@@ -132,7 +132,11 @@ public class PCrearProyecto extends JPanel implements ActionListener
             String fecha = textoFecha.getText();
             String tipos = textoTipos.getText();
 
-            if (nombre.length()==0 || descripcion.length()==0|| participante.length()==0|| correo.length()==0|| fecha.length()==0 || tipos.length()==0 ){
+            if (!(correo.contains("@"))){
+                JOptionPane.showMessageDialog(panelCentral, "El correo debe contener @",
+				"Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if (nombre.length()==0 || descripcion.length()==0|| participante.length()==0|| correo.length()==0|| fecha.length()==0 || tipos.length()==0 ){
                 JOptionPane.showMessageDialog(panelCentral, "Por favor escriba en todos los campos antes de continuar",
 				"Error", JOptionPane.INFORMATION_MESSAGE);
             }
