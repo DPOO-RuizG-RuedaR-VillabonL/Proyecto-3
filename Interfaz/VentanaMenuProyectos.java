@@ -132,17 +132,24 @@ public class VentanaMenuProyectos extends JFrame{
     }
 
     public void AgregarParticipante(String nombre, String correo) throws FileNotFoundException, IOException{
-        Boolean respuesta = menuProyectos.ejecutarAgregarParticipante(proyecto, nombre, correo);
-        if (respuesta==true){
-            JOptionPane.showMessageDialog(pAgregarParticipante, "El participante fue añadido exitosamente",
-				"Proyecto Creado", JOptionPane.INFORMATION_MESSAGE);     
-        }
-        else {
-            JOptionPane.showMessageDialog(pAgregarParticipante, "No se pudo añadir el participante",
+        Boolean respuesta;
+        try 
+        {
+            respuesta = menuProyectos.ejecutarAgregarParticipante(proyecto, nombre, correo);
+            if (respuesta==true){
+                JOptionPane.showMessageDialog(pAgregarParticipante, "El participante fue añadido exitosamente",
+                    "Participante añadido", JOptionPane.INFORMATION_MESSAGE);     
+            }
+        } 
+        catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(pAgregarParticipante, e.getMessage(),
 				"Error", JOptionPane.ERROR_MESSAGE);
         }
-        cambiarPanel(MENU);
-    }
+
+        cambiarPanel(MENU);  
+        }
+        
     public void AgregarTipo(String tipo) throws FileNotFoundException, IOException{
         Boolean respuesta = menuProyectos.ejecutarAgregarTipo(proyecto, tipo);
         if (respuesta==true){

@@ -103,7 +103,6 @@ public class PAgregarParticipante extends JPanel implements ActionListener{
             try {
                 ventanaMenuProyectos.AgregarParticipante(nombre, correo);
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             }

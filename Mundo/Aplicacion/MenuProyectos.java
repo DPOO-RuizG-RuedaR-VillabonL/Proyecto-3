@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
 import Mundo.Actividades.Participante;
 import Mundo.Proyectos.Proyecto;
 
@@ -70,16 +69,27 @@ public class MenuProyectos
         
     }
 
-    public Boolean ejecutarAgregarParticipante(Proyecto proyecto, String nombre, String correo) 
+    public Boolean ejecutarAgregarParticipante(Proyecto proyecto, String nombre, String correo) throws Exception 
     {
-        try {
-        Participante nuevoParticipante = new Participante(nombre, correo);
-        proyecto.agregarParticipante(nuevoParticipante);
-        return true;
+        ArrayList<Participante> participantes = proyecto.getParticipantes();
+        Boolean encontro = false;
+        for (Participante participante : participantes){
+            String nombreP = participante.getNombre();
+            String correoP = participante.getCorreo();
+            if (nombreP.equals(nombre) && correoP.equals(correo)){
+                encontro = true;
+            }
+        }
+        if (encontro == false)
+        {
+            Participante nuevoParticipante = new Participante(nombre, correo);
+            proyecto.agregarParticipante(nuevoParticipante);
+            return true;
+        }
+        else{
+            throw new Exception("Ya existe un participante con ese nombre y correo");
+        }
         
-    } catch (Exception e) {
-        return false;
-    }
     }
 
     public Boolean cambiarFechaFinalizacion(Proyecto proyecto, String fecha) 
@@ -123,9 +133,5 @@ public class MenuProyectos
             }
         }}
     
-    public void generarReporte(Proyecto proyecto){
-
-    }
-        
 
 }

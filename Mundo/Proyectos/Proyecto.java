@@ -58,7 +58,7 @@ public class Proyecto implements Serializable{
 
     public void agregarParticipante(Participante participante)
     {
-        this.participantes.add(participante);
+            this.participantes.add(participante);
     }
 
     public void setFechaFinal(int dia, int mes, int anio)
