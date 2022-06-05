@@ -71,5 +71,6 @@ public class Proyecto implements Serializable{
     }
 
     public void setFechaFinal(LocalDate parse) {
+        this.fechaFinal = parse ;
     }
 }

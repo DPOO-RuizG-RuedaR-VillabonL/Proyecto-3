@@ -95,6 +95,7 @@ public class VentanaMenuProyectos extends JFrame{
             this.add(pInicio);
 
         }else if (comando == FFIN ){
+            pFin = new PFin(this, proyecto);
             this.remove(pMenuProyectos);
             this.add(pFin);
 
@@ -118,7 +119,7 @@ public class VentanaMenuProyectos extends JFrame{
         setSize(getWidth()-1, getHeight()-1);
     }
 
-    public void cambiarFechaFinalizacion(Proyecto proyecto, String fecha) throws FileNotFoundException, IOException {
+    public void cambiarFechaFinalizacion(String fecha) throws FileNotFoundException, IOException {
         Boolean respuesta = menuProyectos.cambiarFechaFinalizacion(proyecto, fecha);
         if (respuesta==true){
             JOptionPane.showMessageDialog(pAgregarParticipante, "La fecha fue cambiada exitosamente",

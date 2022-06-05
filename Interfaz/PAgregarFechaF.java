@@ -22,7 +22,6 @@ import java.io.IOException;
 public class PAgregarFechaF extends JPanel implements ActionListener
 {
     private VentanaMenuProyectos ventanaMenuProyectos;
-    private Proyecto proyecto;
     private JLabel label;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -95,7 +94,7 @@ public class PAgregarFechaF extends JPanel implements ActionListener
             }
             else {
             try {
-                ventanaMenuProyectos.cambiarFechaFinalizacion(proyecto, fecha);
+                ventanaMenuProyectos.cambiarFechaFinalizacion(fecha);
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
