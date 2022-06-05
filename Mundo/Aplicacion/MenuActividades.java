@@ -20,11 +20,6 @@ public class MenuActividades
 {
     Participante participante;
     private ArrayList<String> tiposActividad;
-
-    public void setParticipante(Participante participante) 
-    {
-        this.participante = participante;
-    }
 	
 	public boolean ejecutarCrearActividad(String titulo, String descripcion, String tipo, List<ArrayList<String>> listaTiempos, List<ArrayList<String>> listaFechas)
 	{

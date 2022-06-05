@@ -7,17 +7,18 @@ import java.awt.BorderLayout;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import Mundo.Actividades.Participante;
-import Mundo.Aplicacion.MenuActividades;
+
 import Mundo.Aplicacion.MenuProyectos;
+import Mundo.Aplicacion.MenuTareas;
+import Mundo.Proyectos.PaqueteTrabajo;
 import Mundo.Proyectos.Proyecto;
 
 
 public class VentanaMenuProyectos extends JFrame{
     MenuProyectos menuProyectos;
-    MenuActividades menuActividades;
+    MenuTareas menuTareas;
     PMenuProyectos pMenuProyectos;
-    PElegirParticipante pElegirParticipante;
+  
     PDescripcion pDescripcion;
     PParticipantes pParticipantes;
     PAgregarParticipante pAgregarParticipante;
@@ -25,20 +26,24 @@ public class VentanaMenuProyectos extends JFrame{
     PFin pFin;
     PAgregaTipoActividad pAgregaTipoActividad;
     PAgregarFechaF pAgregarFechaF;
+    PPaquetesTrabajo pPaquetesTrabajo;
+    PAgregarPTrabajo pAgregarPTrabajo;
+    PElegirPTrabajo PElegirPTrabajo;
+
     Proyecto proyecto;
-    Participante participante;
  
     public final String MENU = "MENU";
     public final String MENUPPAL = "MENUPRINCIPAL";
     public final String AGREGAR_PARTICIPANTES = "AGREGARPARTICIPANTES";
-    public final String AGREGAR_P = "AGREGAR_P";
     public final String AGREGAR_TIPO = "AGREGARTIPO";
-    public final String GESTIONAR = "GESTIONAR";
     public final String MODIFICAR_FIN = "MODIFICARFIN";
     public final String DESCRIPCION = "DESCRIPCION";
     public final String PARTICIPANTES = "PARTICIPANTES";
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
+    public final String P_TRABAJO = "P_TRABAJO";
+    public final String AGREGAR_PAQUETES = "AGREGAR_P";
+    public final String GESTIONAR = "GESTIONAR";
 
     VentanaMenuProyectos(MenuProyectos menuProyectos, Proyecto proyecto) throws FileNotFoundException, IOException{
         this.menuProyectos = menuProyectos;
@@ -48,10 +53,12 @@ public class VentanaMenuProyectos extends JFrame{
         pParticipantes = new PParticipantes(this, proyecto);
         pInicio = new PInicio(this, proyecto);
         pFin = new PFin(this, proyecto);
-        pElegirParticipante = new PElegirParticipante(this, proyecto.getParticipantes());
         pAgregarParticipante = new PAgregarParticipante(this, proyecto);
         pAgregaTipoActividad = new PAgregaTipoActividad(this);
         pAgregarFechaF = new PAgregarFechaF(this, proyecto);
+        pPaquetesTrabajo = new PPaquetesTrabajo(this, proyecto);
+        pAgregarPTrabajo = new PAgregarPTrabajo(this, proyecto);
+        PElegirPTrabajo = new PElegirPTrabajo(this, proyecto.getPaquetesTrabajo());
         
         setTitle("Menu Proyectos");
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -63,7 +70,6 @@ public class VentanaMenuProyectos extends JFrame{
 
     public void cambiarPanel(String comando) throws FileNotFoundException, IOException {
         if (comando == MENU){
-            this.remove(pElegirParticipante);
             this.remove(pDescripcion);
             this.remove(pParticipantes);
             this.remove(pInicio);
@@ -71,6 +77,9 @@ public class VentanaMenuProyectos extends JFrame{
             this.remove(pAgregarParticipante);
             this.remove(pAgregaTipoActividad);
             this.remove(pAgregarFechaF);
+            this.remove(pPaquetesTrabajo);
+            this.remove(pAgregarPTrabajo);
+            this.remove(PElegirPTrabajo);
             this.add(pMenuProyectos);
 
         }else if (comando == MENUPPAL){
@@ -78,8 +87,8 @@ public class VentanaMenuProyectos extends JFrame{
 
         }else if (comando == GESTIONAR){
             this.remove(pMenuProyectos);
-            pElegirParticipante = new PElegirParticipante(this, proyecto.getParticipantes());
-            this.add(pElegirParticipante);
+            PElegirPTrabajo = new PElegirPTrabajo(this, proyecto.getPaquetesTrabajo());
+            this.add(PElegirPTrabajo);
             
         }else if (comando == DESCRIPCION){
             this.remove(pMenuProyectos);
@@ -111,10 +120,17 @@ public class VentanaMenuProyectos extends JFrame{
             this.remove(pMenuProyectos);
             this.add(pAgregarFechaF);
         
-        }else if (comando == AGREGAR_P){
+        }else if (comando == P_TRABAJO){
+            pPaquetesTrabajo = new PPaquetesTrabajo(this, proyecto);
+            this.remove(pMenuProyectos);
+            this.add(pPaquetesTrabajo);
 
-        }else{
-            ElegirParticipante(comando);
+        }else if (comando == AGREGAR_PAQUETES){
+            this.remove(pMenuProyectos);
+            this.add(pAgregarPTrabajo);
+
+        }else {
+            elegirPaquete(comando);
         }
         setSize(getWidth()+1, getHeight()+1);
     }
@@ -133,7 +149,7 @@ public class VentanaMenuProyectos extends JFrame{
     }
 
     public void AgregarParticipante(String nombre, String correo) throws FileNotFoundException, IOException{
-        Boolean respuesta;
+       Boolean respuesta;
         try 
         {
             respuesta = menuProyectos.ejecutarAgregarParticipante(proyecto, nombre, correo);
@@ -149,6 +165,23 @@ public class VentanaMenuProyectos extends JFrame{
         }
 
         cambiarPanel(MENU);  
+        } 
+        public void pAgregarPTrabajo(String nombre, String descripcion) throws FileNotFoundException, IOException {
+            Boolean respuesta;
+            try 
+            {
+                respuesta = menuProyectos.ejecutarAgregarPTrabajo(proyecto, nombre, descripcion);
+                if (respuesta==true){
+                    JOptionPane.showMessageDialog(pAgregarPTrabajo, "El paquete de trabajo fue añadido exitosamente",
+                        "Paquete añadido", JOptionPane.INFORMATION_MESSAGE);     
+                }
+            } 
+            catch (Exception e) 
+            {
+                JOptionPane.showMessageDialog(pAgregarPTrabajo, e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            cambiarPanel(MENU);  
         }
         
     public void AgregarTipo(String tipo) throws FileNotFoundException, IOException{
@@ -164,12 +197,24 @@ public class VentanaMenuProyectos extends JFrame{
         cambiarPanel(MENU);
     }
 
+     /*
     public void ElegirParticipante(String boton) throws FileNotFoundException, IOException{
         int num = Integer.parseInt(boton.replace("PARTICIPANTE ", ""));
         menuActividades = new MenuActividades();
         participante = menuActividades.elegirParticipante(proyecto, num);
         cambiarPanel(MENU);
         new VentanaMenuActividades(menuActividades, participante);
+    }*/
+
+    private void elegirPaquete(String boton) throws FileNotFoundException, IOException {
+        int num = Integer.parseInt(boton.replace("PAQUETE ", ""));
+        menuTareas = new MenuTareas();
+        PaqueteTrabajo paquete = menuTareas.elegirPaqueteTrabajo(proyecto, num);
+        cambiarPanel(MENU);
+        new VentanaMenuPTrabajo(menuTareas, paquete);
+    }
+
+
     }
     
-}
+

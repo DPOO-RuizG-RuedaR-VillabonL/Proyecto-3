@@ -13,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import Mundo.Actividades.Participante;
+import Mundo.Proyectos.PaqueteTrabajo;
 import Mundo.Proyectos.Proyecto;
 
 public class MenuProyectos
@@ -96,6 +97,28 @@ public class MenuProyectos
         }
         else{
             throw new Exception("Ya existe un participante con ese nombre y correo");
+        }
+        
+    }
+    public Boolean ejecutarAgregarPTrabajo(Proyecto proyecto, String nombre, String descripcion) throws Exception 
+    {   
+        ArrayList<PaqueteTrabajo> paquetes = proyecto.getPaquetesTrabajo();
+        Boolean encontro = false;
+        for (PaqueteTrabajo paquete : paquetes){
+            String nombreP = paquete.getNombre();
+            String descripcionP = paquete.getDescripcion();
+            if (nombreP.equals(nombre) && descripcionP.equals(descripcion)){
+                encontro = true;
+            }
+        }
+        if (encontro == false)
+        {
+            PaqueteTrabajo nuevoPaquete = new PaqueteTrabajo(nombre, descripcion, proyecto);
+            proyecto.agregarPaquete(nuevoPaquete);
+            return true;
+        }
+        else{
+            throw new Exception("Ya existe un paquete con ese nombre y descripción");
         }
         
     }

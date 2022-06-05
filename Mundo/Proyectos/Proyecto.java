@@ -13,6 +13,7 @@ public class Proyecto implements Serializable{
     private LocalDate fechaInicial;
     private LocalDate fechaFinal;
     private ArrayList<Participante> participantes;
+    private ArrayList<PaqueteTrabajo> paquetesTrabajo;
     private ArrayList<String> tiposActividad;
     private ArrayList<String> tiposTarea;
 
@@ -24,6 +25,7 @@ public class Proyecto implements Serializable{
         this.tiposActividad = tiposActividad;
         this.tiposTarea = tiposTarea;
         participantes = new ArrayList<Participante>();
+        paquetesTrabajo = new ArrayList<PaqueteTrabajo>();
         Participante primerParticipante = new Participante(nombreParticipante, correoParticipante);
         participantes.add(primerParticipante);
 
@@ -61,10 +63,13 @@ public class Proyecto implements Serializable{
     public ArrayList<String> getTiposTarea() {
         return tiposTarea;
     }
+    public ArrayList<PaqueteTrabajo> getPaquetesTrabajo() {
+        return paquetesTrabajo;
+    }
 
     public void agregarParticipante(Participante participante)
     {
-            this.participantes.add(participante);
+        this.participantes.add(participante);
     }
 
     public void setFechaFinal(int dia, int mes, int anio)
@@ -78,5 +83,9 @@ public class Proyecto implements Serializable{
 
     public void setFechaFinal(LocalDate parse) {
         this.fechaFinal = parse ;
+    }
+
+    public void agregarPaquete(PaqueteTrabajo nuevoPaquete) {
+        this.paquetesTrabajo.add(nuevoPaquete);
     }
 }
