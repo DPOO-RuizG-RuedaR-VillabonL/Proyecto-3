@@ -7,21 +7,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.*;
 
-import Mundo.Proyectos.Proyecto;
+import Mundo.Proyectos.PaqueteTrabajo;
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 
-public class PFin extends JPanel implements ActionListener{
+public class PDescripcionPP extends JPanel implements ActionListener{
     private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
-    private Proyecto proyecto;
+    private PaqueteTrabajo paquete;
 
     public final String MENUPPAL = "MENUPRINCIPAL";
     public final String MENU = "MENU";
@@ -33,10 +32,11 @@ public class PFin extends JPanel implements ActionListener{
     public final String PARTICIPANTES = "PARTICIPANTES";
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
+    
 
-    public PFin (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
+    public PDescripcionPP (VentanaMenuProyectos ventanaMenuProyectos, PaqueteTrabajo paquete) {
         this.ventanaMenuProyectos = ventanaMenuProyectos;
-        this.proyecto = proyecto;
+        this.paquete = paquete;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
 
@@ -44,7 +44,7 @@ public class PFin extends JPanel implements ActionListener{
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("Descripción  del proyecto "+ this.proyecto.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Descripción  de "+ this.paquete.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -59,15 +59,7 @@ public class PFin extends JPanel implements ActionListener{
         panelCentral.setBackground(new Color(02,28, 30) ); //fondo color principal
 
         //se crea texto instrucción, boton1 y boton2 y se añaden al panel central
-
-        LocalDate FechaInicio = this.proyecto.getFechaFinal();//For reference
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        String Inicio = FechaInicio.format(formatter);
-        if (Inicio.equals("31 diciembre 3022")){
-            Inicio = ("Todavia no se ha asignado una fecha de finalización");
-        }
-
-        JLabel instruccion = new JLabel(Inicio, SwingConstants.CENTER);
+        JLabel instruccion = new JLabel(paquete.getDescripcion(), SwingConstants.CENTER);
         instruccion.setOpaque(true);
         instruccion.setFont(new Font("Congenial SemiBold", Font.PLAIN, 20));
         instruccion.setBackground(new Color(02,28, 30) ); //fondo principal
@@ -79,7 +71,7 @@ public class PFin extends JPanel implements ActionListener{
         this.add(panelCentral, BorderLayout.CENTER);
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
-        JButton btnMenu = new JButton("Menú Proyectos");
+        JButton btnMenu = new JButton("Menú paquetes de tabajo");
         btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
@@ -89,6 +81,9 @@ public class PFin extends JPanel implements ActionListener{
 
         this.add(panelAbajo, BorderLayout.SOUTH);
 
+    }
+
+    public PDescripcionPP(VentanaMenuPProyectos ventanaMenuPProyectos) {
     }
 
     @Override
@@ -106,4 +101,5 @@ public class PFin extends JPanel implements ActionListener{
  
     
 }
+
 

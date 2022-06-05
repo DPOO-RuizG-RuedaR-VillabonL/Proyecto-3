@@ -13,7 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import Mundo.Proyectos.Proyecto;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +21,6 @@ import java.io.IOException;
 public class PAgregarFechaF extends JPanel implements ActionListener
 {
     private VentanaMenuProyectos ventanaMenuProyectos;
-    private Proyecto proyecto;
     private JLabel label;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -31,7 +29,7 @@ public class PAgregarFechaF extends JPanel implements ActionListener
     public final String MENU = "MENU";
     public final String AGREGAR_P = "AGREGAR_P";
 
-    public PAgregarFechaF(VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto){
+    public PAgregarFechaF(VentanaMenuProyectos ventanaMenuProyectos){
 
         this.ventanaMenuProyectos = ventanaMenuProyectos;
         this.setBackground(new Color(02,28, 30) );
@@ -95,7 +93,7 @@ public class PAgregarFechaF extends JPanel implements ActionListener
             }
             else {
             try {
-                ventanaMenuProyectos.cambiarFechaFinalizacion(proyecto, fecha);
+                ventanaMenuProyectos.cambiarFechaFinalizacion(fecha);
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

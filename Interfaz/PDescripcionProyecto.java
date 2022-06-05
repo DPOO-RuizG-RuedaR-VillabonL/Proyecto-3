@@ -15,7 +15,7 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class PDescripcion extends JPanel implements ActionListener{
+public class PDescripcionProyecto extends JPanel implements ActionListener{
     private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -32,7 +32,7 @@ public class PDescripcion extends JPanel implements ActionListener{
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
 
-    public PDescripcion (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
+    public PDescripcionProyecto (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
         this.ventanaMenuProyectos = ventanaMenuProyectos;
         this.proyecto = proyecto;
     

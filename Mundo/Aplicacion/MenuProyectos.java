@@ -34,7 +34,14 @@ public class MenuProyectos
             ArrayList<String> tiposActividad = new ArrayList<String>();
             for (String tipo : tiposA)
             {tiposActividad.add(tipo);}
-		
+            
+            String[] Listafecha = fecha.split("-");
+            int anio  = Integer.valueOf(Listafecha[0]);
+            int mes = Integer.valueOf(Listafecha[1]);
+            int dia = Integer.valueOf(Listafecha[2]);
+            if ( 0 > anio || 0 > mes || 0 > dia || 12 < mes || 31 < dia){
+                return false;
+            }
             LocalDate fechaInicio = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE );
 
             Proyecto nuevoProyecto = new Proyecto(nombre, descripcion, participante, correo, fechaInicio, tiposActividad);
@@ -156,25 +163,18 @@ public class MenuProyectos
     private void ejecutarConsultarFechaFin (Proyecto proyecto) 
     {
         LocalDate rta = proyecto.getFechaFinal();
-        LocalDate fechaEstandar = LocalDate.parse("3022-12-31");
-        if (fechaEstandar.equals(rta))
-            System.out.println("Todavía no tiene fecha de finalización");
-        else
-            System.out.println(rta);
+        System.out.println(rta);
 
     }
 
     public Boolean cambiarFechaFinalizacion(Proyecto proyecto, String fecha) 
     {
-        try {
-            proyecto.setFechaFinal(LocalDate.parse(fecha));
-            return true;
+            LocalDate fechaFinal = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE );
+            proyecto.setFechaFinal(fechaFinal);
+            System.out.print(fechaFinal);
+            System.out.println(fecha);
+            return true;         
             
-        } catch (Exception e) {
-            return false;
-        }
-            
-
     }
 
     public void mostrarMenuProyectos(Proyecto proyecto)

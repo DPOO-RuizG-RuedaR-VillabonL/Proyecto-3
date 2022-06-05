@@ -70,6 +70,7 @@ public class Proyecto implements Serializable{
         this.tiposActividad = tiposActividad;
     }
 
-    public void setFechaFinal(LocalDate parse) {
+    public void setFechaFinal(LocalDate fecha) {
+        this.fechaFinal = fecha;
     }
 }

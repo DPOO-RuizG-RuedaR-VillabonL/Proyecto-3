@@ -18,7 +18,7 @@ public class VentanaMenuProyectos extends JFrame{
     MenuActividades menuActividades;
     PMenuProyectos pMenuProyectos;
     PElegirParticipante pElegirParticipante;
-    PDescripcion pDescripcion;
+    PDescripcionProyecto pDescripcion;
     PParticipantes pParticipantes;
     PAgregarParticipante pAgregarParticipante;
     PInicio pInicio;
@@ -44,14 +44,14 @@ public class VentanaMenuProyectos extends JFrame{
         this.menuProyectos = menuProyectos;
         this.proyecto = proyecto;
         pMenuProyectos = new PMenuProyectos(this, proyecto);
-        pDescripcion = new PDescripcion(this, proyecto);
+        pDescripcion = new PDescripcionProyecto(this, proyecto);
         pParticipantes = new PParticipantes(this, proyecto);
         pInicio = new PInicio(this, proyecto);
         pFin = new PFin(this, proyecto);
         pElegirParticipante = new PElegirParticipante(this, proyecto.getParticipantes());
         pAgregarParticipante = new PAgregarParticipante(this, proyecto);
         pAgregaTipoActividad = new PAgregaTipoActividad(this);
-        pAgregarFechaF = new PAgregarFechaF(this, proyecto);
+        pAgregarFechaF = new PAgregarFechaF(this);
         
         setTitle("Menu Proyectos");
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -118,8 +118,8 @@ public class VentanaMenuProyectos extends JFrame{
         setSize(getWidth()-1, getHeight()-1);
     }
 
-    public void cambiarFechaFinalizacion(Proyecto proyecto, String fecha) throws FileNotFoundException, IOException {
-        Boolean respuesta = menuProyectos.cambiarFechaFinalizacion(proyecto, fecha);
+    public void cambiarFechaFinalizacion(String fecha) throws FileNotFoundException, IOException {
+        Boolean respuesta = menuProyectos.cambiarFechaFinalizacion( proyecto, fecha);
         if (respuesta==true){
             JOptionPane.showMessageDialog(pAgregarParticipante, "La fecha fue cambiada exitosamente",
 				"Proyecto Creado", JOptionPane.INFORMATION_MESSAGE);     
