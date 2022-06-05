@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -136,6 +137,17 @@ public class PCrearProyecto extends JPanel implements ActionListener
                 JOptionPane.showMessageDialog(panelCentral, "Por favor escriba en todos los campos antes de continuar",
 				"Error", JOptionPane.INFORMATION_MESSAGE);
             }
+            String[] Listafecha = fecha.split("-");
+            int anio  = Integer.valueOf(Listafecha[0]);
+            int mes = Integer.valueOf(Listafecha[1]);
+            int dia = Integer.valueOf(Listafecha[2]);
+            if ( 0 > anio || 0 > mes || 0 > dia || 12 < mes || 31 < dia){
+                JOptionPane.showMessageDialog(panelCentral, "Por favor escriba una fecha que exista en el calendario gregoriano",
+				"Error", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+
+
             else {
             try {
                 ventanaMenuPrincipal.CrearProyecto(nombre, descripcion, participante, correo, fecha, tipos);
