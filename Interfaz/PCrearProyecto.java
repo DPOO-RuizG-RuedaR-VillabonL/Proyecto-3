@@ -29,7 +29,8 @@ public class PCrearProyecto extends JPanel implements ActionListener
     private JTextField textoParticipante;
     private JTextField textoCorreo;
     private JFormattedTextField textoFecha;
-    private JTextField textoTipos;
+    private JTextField textoTiposA;
+    private JTextField textoTiposT;
 
     public final String MENU = "MENU";
     public final String CREAR = "CREAR"; 
@@ -48,7 +49,7 @@ public class PCrearProyecto extends JPanel implements ActionListener
 
         panelCentral = new JPanel();
         panelCentral.setBackground(new Color(02,28, 30) );
-        GridLayout grid = new GridLayout(6, 2, 0, 15);
+        GridLayout grid = new GridLayout(7, 2, 0, 15);
         panelCentral.setLayout(grid);
 
         textoNombre = new JTextField(SwingConstants.CENTER);
@@ -77,10 +78,15 @@ public class PCrearProyecto extends JPanel implements ActionListener
         lblFecha.setBackground(new Color(02,28, 30) ); //fondo principal
         lblFecha.setForeground( new Color(111,185, 143) );
 
-        textoTipos = new JTextField();
-        JLabel lblTipos = new JLabel("Ingrese los tipos de actividad separados por comas", SwingConstants.LEFT);
-        lblTipos.setBackground(new Color(02,28, 30) );
-        lblTipos.setForeground( new Color(111,185, 143) );
+        textoTiposA = new JTextField();
+        JLabel lblTiposA = new JLabel("Ingrese los tipos de actividad separados por comas", SwingConstants.LEFT);
+        lblTiposA.setBackground(new Color(02,28, 30) );
+        lblTiposA.setForeground( new Color(111,185, 143) );
+
+        textoTiposT = new JTextField();
+        JLabel lblTiposT = new JLabel("Ingrese los tipos de tarea separados por comas", SwingConstants.LEFT);
+        lblTiposT.setBackground(new Color(02,28, 30) );
+        lblTiposT.setForeground( new Color(111,185, 143) );
 
         panelCentral.setBorder(new EmptyBorder(50, 100, 50, 50));
 
@@ -94,8 +100,10 @@ public class PCrearProyecto extends JPanel implements ActionListener
         panelCentral.add(textoCorreo);
         panelCentral.add(lblFecha);
         panelCentral.add(textoFecha);
-        panelCentral.add(lblTipos);
-        panelCentral.add(textoTipos);
+        panelCentral.add(lblTiposA);
+        panelCentral.add(textoTiposA);
+        panelCentral.add(lblTiposT);
+        panelCentral.add(textoTiposT);
  
         this.add(panelCentral, BorderLayout.CENTER);
 
@@ -130,19 +138,20 @@ public class PCrearProyecto extends JPanel implements ActionListener
             String participante = textoParticipante.getText();
             String correo = textoCorreo.getText();
             String fecha = textoFecha.getText();
-            String tipos = textoTipos.getText();
+            String tiposA = textoTiposA.getText();
+            String tiposT = textoTiposT.getText();
 
             if (!(correo.contains("@"))){
                 JOptionPane.showMessageDialog(panelCentral, "El correo debe contener @",
 				"Error", JOptionPane.INFORMATION_MESSAGE);
             }
-            else if (nombre.length()==0 || descripcion.length()==0|| participante.length()==0|| correo.length()==0|| fecha.length()==0 || tipos.length()==0 ){
+            else if (nombre.length()==0 || descripcion.length()==0|| participante.length()==0|| correo.length()==0|| fecha.length()==0 || tiposA.length()==0 || tiposT.length()==0 ){
                 JOptionPane.showMessageDialog(panelCentral, "Por favor escriba en todos los campos antes de continuar",
 				"Error", JOptionPane.INFORMATION_MESSAGE);
             }
             else {
             try {
-                ventanaMenuPrincipal.CrearProyecto(nombre, descripcion, participante, correo, fecha, tipos);
+                ventanaMenuPrincipal.CrearProyecto(nombre, descripcion, participante, correo, fecha, tiposA, tiposT);
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

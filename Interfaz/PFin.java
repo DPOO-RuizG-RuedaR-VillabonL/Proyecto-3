@@ -44,7 +44,7 @@ public class PFin extends JPanel implements ActionListener{
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("Descripción  "+ this.proyecto.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Fecha finalización  "+ this.proyecto.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -60,9 +60,13 @@ public class PFin extends JPanel implements ActionListener{
 
         //se crea texto instrucción, boton1 y boton2 y se añaden al panel central
 
-        LocalDate FechaInicio = proyecto.getFechaFinal();//For reference
+        LocalDate FechaInicio = proyecto.getFechaFinal();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String Inicio = FechaInicio.format(formatter);
+        if (FechaInicio.equals(LocalDate.of(3022, 12, 31))){
+            Inicio = "No se ha añadido una fecha final para este proyecto";
+        }
+        
 
         JLabel instruccion = new JLabel(Inicio, SwingConstants.CENTER);
         instruccion.setOpaque(true);

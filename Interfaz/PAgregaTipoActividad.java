@@ -44,7 +44,7 @@ public class PAgregaTipoActividad extends JPanel implements ActionListener{
         GridLayout grid1 = new GridLayout(1, 2, 0, 5); 
         panelCentral.setLayout(grid1);
         //crear y agregar elementos de panel central
-        JLabel elemento = new JLabel("Seleccione una opción: ", SwingConstants.CENTER);
+        JLabel elemento = new JLabel("Digite el tipo de actividad:", SwingConstants.CENTER);
         elemento.setOpaque(true);
         elemento.setFont(new Font("Congenial SemiBold", Font.PLAIN, 20));
         elemento.setBackground(new Color(02,28, 30) ); //fondo principal

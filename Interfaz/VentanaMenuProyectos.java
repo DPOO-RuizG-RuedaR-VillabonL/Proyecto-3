@@ -116,17 +116,17 @@ public class VentanaMenuProyectos extends JFrame{
         }else{
             ElegirParticipante(comando);
         }
-        setSize(getWidth()-1, getHeight()-1);
+        setSize(getWidth()+1, getHeight()+1);
     }
 
     public void cambiarFechaFinalizacion(String fecha) throws FileNotFoundException, IOException {
         Boolean respuesta = menuProyectos.cambiarFechaFinalizacion(proyecto, fecha);
         if (respuesta==true){
             JOptionPane.showMessageDialog(pAgregarParticipante, "La fecha fue cambiada exitosamente",
-				"Proyecto Creado", JOptionPane.INFORMATION_MESSAGE);     
+				"Fecha de Finalización Agregada", JOptionPane.INFORMATION_MESSAGE);     
         }
         else {
-            JOptionPane.showMessageDialog(pAgregarParticipante, "No se pudo cambiar la fecha",
+            JOptionPane.showMessageDialog(pAgregarParticipante, "La fecha de finalización debe ser posterior a la fecha de inicio",
 				"Error", JOptionPane.ERROR_MESSAGE);
         }
         cambiarPanel(MENU);

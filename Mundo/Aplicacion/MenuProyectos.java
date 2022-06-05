@@ -24,17 +24,25 @@ public class MenuProyectos
         proyectos = new ArrayList<Proyecto>();
     }
 	
-	public Boolean ejecutarCrearProyecto(String nombre, String descripcion, String participante, String correo, String fecha, String tipos)
+	public Boolean ejecutarCrearProyecto(String nombre, String descripcion, String participante, String correo, String fecha, String tiposActividad, String tiposTarea)
 	{
         try {
-            String[] tiposA = tipos.toLowerCase().replace(" ", "").split(", ");
-            ArrayList<String> tiposActividad = new ArrayList<String>();
+            String[] tiposA = tiposActividad.toLowerCase().replace(" ", "").split(", ");
+            ArrayList<String> tiposAct = new ArrayList<String>();
             for (String tipo : tiposA)
-            {tiposActividad.add(tipo);}
-		
+            {
+                tiposAct.add(tipo.strip());
+            }
+            
+            String[] tiposT = tiposTarea.toLowerCase().split(", ");
+            ArrayList<String> tiposTa = new ArrayList<String>();
+            for (String tipo : tiposT)
+            {
+                tiposTa.add(tipo.strip());
+            }
             LocalDate fechaInicio = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE );
 
-            Proyecto nuevoProyecto = new Proyecto(nombre, descripcion, participante, correo, fechaInicio, tiposActividad);
+            Proyecto nuevoProyecto = new Proyecto(nombre, descripcion, participante, correo, fechaInicio, tiposAct, tiposTa);
             nuevoProyecto.setFechaFinal(31, 12, 3022);
             proyectos.add(nuevoProyecto);
             return true;
@@ -94,14 +102,17 @@ public class MenuProyectos
 
     public Boolean cambiarFechaFinalizacion(Proyecto proyecto, String fecha) 
     {
-        try {
-            proyecto.setFechaFinal(LocalDate.parse(fecha));
-            return true;
-            
-        } catch (Exception e) {
-            return false;
-        }
-            
+            LocalDate fechaInicial = proyecto.getFechaInicial();
+            LocalDate fechaFinal = LocalDate.parse(fecha);
+            if (fechaFinal.isAfter(fechaInicial))
+            {
+                proyecto.setFechaFinal(fechaFinal);
+                return true;
+            }
+            else
+            {
+                return false; 
+            }
 
     }
 

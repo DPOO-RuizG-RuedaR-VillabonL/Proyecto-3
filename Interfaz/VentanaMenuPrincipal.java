@@ -68,8 +68,8 @@ public class VentanaMenuPrincipal extends JFrame {
         setSize(getWidth()-1, getHeight()-1);
     } 
 
-    public void CrearProyecto(String nombre, String descripcion, String participante, String correo, String fecha, String tipos) throws FileNotFoundException, IOException{
-        Boolean respuesta = menuProyectos.ejecutarCrearProyecto(nombre, descripcion, participante, correo, fecha, tipos);
+    public void CrearProyecto(String nombre, String descripcion, String participante, String correo, String fecha, String tiposA, String tiposT) throws FileNotFoundException, IOException{
+        Boolean respuesta = menuProyectos.ejecutarCrearProyecto(nombre, descripcion, participante, correo, fecha, tiposA, tiposT);
         if (respuesta==true){
             JOptionPane.showMessageDialog(pCrearProyecto, "El proyecto fue creado exitosamente",
 				"Proyecto Creado", JOptionPane.INFORMATION_MESSAGE);     

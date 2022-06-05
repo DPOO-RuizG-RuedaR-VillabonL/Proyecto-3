@@ -14,13 +14,15 @@ public class Proyecto implements Serializable{
     private LocalDate fechaFinal;
     private ArrayList<Participante> participantes;
     private ArrayList<String> tiposActividad;
+    private ArrayList<String> tiposTarea;
 
-    public Proyecto(String nombre, String descripcion, String nombreParticipante, String correoParticipante, LocalDate fechaInicio, ArrayList<String> tiposActividad)
+    public Proyecto(String nombre, String descripcion, String nombreParticipante, String correoParticipante, LocalDate fechaInicio, ArrayList<String> tiposActividad, ArrayList<String> tiposTarea)
     {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaInicial = fechaInicio;
         this.tiposActividad = tiposActividad;
+        this.tiposTarea = tiposTarea;
         participantes = new ArrayList<Participante>();
         Participante primerParticipante = new Participante(nombreParticipante, correoParticipante);
         participantes.add(primerParticipante);
@@ -54,6 +56,10 @@ public class Proyecto implements Serializable{
 
     public ArrayList<String> getTiposActividad() {
         return tiposActividad;
+    }
+
+    public ArrayList<String> getTiposTarea() {
+        return tiposTarea;
     }
 
     public void agregarParticipante(Participante participante)
