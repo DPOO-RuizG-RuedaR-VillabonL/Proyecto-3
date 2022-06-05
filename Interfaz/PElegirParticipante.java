@@ -80,11 +80,14 @@ public class PElegirParticipante extends JPanel implements ActionListener
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         String comando = e.getActionCommand();
-        try {
+        try
+        {
             ventanaMenuProyectos.cambiarPanel(comando);
-        } catch (IOException e1) {
+        }
+        catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }

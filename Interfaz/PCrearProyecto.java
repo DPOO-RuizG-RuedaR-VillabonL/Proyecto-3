@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
