@@ -19,7 +19,7 @@ public class VentanaMenuProyectos extends JFrame{
     MenuTareas menuTareas;
     PMenuProyectos pMenuProyectos;
   
-    PDescripcion pDescripcion;
+    PDescripcionProyecto pDescripcion;
     PParticipantes pParticipantes;
     PAgregarParticipante pAgregarParticipante;
     PInicio pInicio;
@@ -49,7 +49,7 @@ public class VentanaMenuProyectos extends JFrame{
         this.menuProyectos = menuProyectos;
         this.proyecto = proyecto;
         pMenuProyectos = new PMenuProyectos(this, proyecto);
-        pDescripcion = new PDescripcion(this, proyecto);
+        pDescripcion = new PDescripcionProyecto(this, proyecto);
         pParticipantes = new PParticipantes(this, proyecto);
         pInicio = new PInicio(this, proyecto);
         pFin = new PFin(this, proyecto);

@@ -1,6 +1,8 @@
 package Mundo.Proyectos;
 
-public class PaqueteTrabajo {
+import java.io.Serializable;
+
+public class PaqueteTrabajo implements Serializable{
     private String nombre;
     private String descripcion; 
     private Proyecto proyecto;

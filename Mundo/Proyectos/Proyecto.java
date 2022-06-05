@@ -81,8 +81,8 @@ public class Proyecto implements Serializable{
         this.tiposActividad = tiposActividad;
     }
 
-    public void setFechaFinal(LocalDate parse) {
-        this.fechaFinal = parse ;
+    public void setFechaFinal(LocalDate fecha) {
+        this.fechaFinal = fecha ;
     }
 
     public void agregarPaquete(PaqueteTrabajo nuevoPaquete) {
