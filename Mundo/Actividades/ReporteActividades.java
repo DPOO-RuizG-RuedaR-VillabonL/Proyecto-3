@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ReporteActividades implements Serializable{
-
+public class ReporteActividades implements Serializable
+{
     private ArrayList<Actividad> actividades;
 
     public ReporteActividades(ArrayList<Actividad> actividades)
@@ -22,7 +22,7 @@ public class ReporteActividades implements Serializable{
         for (int i = 0; i < cantidadActividades; i++)
         {
             Actividad actividad = actividades.get(i);
-            double duracion = actividad.getDuracion();
+            double duracion = actividad.getDuracionSegundos();
             sumaTiempos += duracion;
         }
         if (cantidadActividades != 0)
@@ -44,7 +44,7 @@ public class ReporteActividades implements Serializable{
                 if (actividad.getTipo().equals(tipo))
                 {
                     cant++;
-                    suma+= actividad.getDuracion();
+                    suma+= actividad.getDuracionSegundos();
                 }
             }
             if (cant!=0)
@@ -52,13 +52,7 @@ public class ReporteActividades implements Serializable{
                 double promedio = suma/cant;
                 mapaPorTipo.put(tipo, promedio);
             }
-
         }
         return mapaPorTipo;
-
-    
-
     }
-    
-    
 }

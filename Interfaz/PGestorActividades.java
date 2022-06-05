@@ -17,7 +17,8 @@ public class PGestorActividades extends JPanel implements ActionListener{
     public final String CREAR = "CREAR";
     public final String ESTADISTICAS = "ESTADISTICAS";
 
-    public PGestorActividades(VentanaMenuActividades ventanaMenuActividades) {
+    public PGestorActividades(VentanaMenuActividades ventanaMenuActividades)
+    {
         this.ventanaMenuActividades= ventanaMenuActividades;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
@@ -59,16 +60,12 @@ public class PGestorActividades extends JPanel implements ActionListener{
         //se crean las margenes y se agrega el panel central al panel principal
         panelCentral.setBorder(new EmptyBorder(0, 120 , 0, 120 ));
         this.add(panelCentral, BorderLayout.CENTER);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         String comando = e.getActionCommand();
         ventanaMenuActividades.cambiarPanel(comando);
-        
     }
-
- 
-    
 }

@@ -1,6 +1,5 @@
 package Interfaz;
 
-
 import java.awt.*;
 
 import javax.swing.JButton; 
@@ -15,7 +14,8 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class PDescripcion extends JPanel implements ActionListener{
+public class PDescripcion extends JPanel implements ActionListener
+{
     private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -32,13 +32,12 @@ public class PDescripcion extends JPanel implements ActionListener{
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
 
-    public PDescripcion (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
+    public PDescripcion (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto)
+    {
         this.ventanaMenuProyectos = ventanaMenuProyectos;
         this.proyecto = proyecto;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
-
-        
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
@@ -78,22 +77,21 @@ public class PDescripcion extends JPanel implements ActionListener{
         panelAbajo.setForeground( new Color(111,185, 143) );
 
         this.add(panelAbajo, BorderLayout.SOUTH);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         String comando = e.getActionCommand();
-        try {
+        try
+        {
             ventanaMenuProyectos.cambiarPanel(comando);
-        } catch (IOException e2) {
+        } 
+        catch (IOException e2)
+        {
             // TODO Auto-generated catch block
             e2.printStackTrace();
-        }
-        
+        }   
     }
-
- 
-    
 }
 

@@ -18,7 +18,6 @@ public class Actividad implements Serializable
     private List<ArrayList<LocalDate>> listaFechas;
     private List<ArrayList<LocalTime>> listaTiempos;
 
-
     public Actividad(String titulo, String descripcion, String tipo, List<ArrayList<LocalDate>> listaFechas,
             List<ArrayList<LocalTime>> listaTiempos, Participante participante) 
     {
@@ -94,7 +93,7 @@ public class Actividad implements Serializable
         double diffFechas = fechaDiffInicialFinal * 86400;
         double diffHoras = horaDiffInicialFinal;
         double diffsSegundos = diffFechas + diffHoras;
-        duracionSegundos = 2*diffsSegundos;
+        duracionSegundos = diffsSegundos;
 
         while(itFecha.hasNext())
         {

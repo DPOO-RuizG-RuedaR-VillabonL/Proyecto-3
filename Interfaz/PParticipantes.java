@@ -17,7 +17,8 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
-public class PParticipantes extends JPanel implements ActionListener{
+public class PParticipantes extends JPanel implements ActionListener
+{
     private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -34,13 +35,12 @@ public class PParticipantes extends JPanel implements ActionListener{
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
 
-    public PParticipantes (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
+    public PParticipantes (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto)
+    {
         this.ventanaMenuProyectos = ventanaMenuProyectos;
         this.proyecto = proyecto;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
-
-        
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
@@ -61,7 +61,8 @@ public class PParticipantes extends JPanel implements ActionListener{
         //se crea texto nombre al panel central
         ArrayList<Participante> participantes = proyecto.getParticipantes();
         int i;
-        for (i = 0; i < participantes.size(); i++){
+        for (i = 0; i < participantes.size(); i++)
+        {
             String nombre = participantes.get(i).getNombre();
             String correo = participantes.get(i).getCorreo();
 
@@ -78,11 +79,7 @@ public class PParticipantes extends JPanel implements ActionListener{
             correoT.setBackground(new Color(02,28, 30) ); //fondo principal
             correoT.setForeground( new Color(111,185, 143) ); //letra principal
             panelCentral.add(correoT, BorderLayout.CENTER);
-
-
-            
         }
-
         //se crean las margenes y se agrega el panel central al panel principal
         panelCentral.setBorder(new EmptyBorder(0, 300 , 0, 300 ));
         this.add(panelCentral, BorderLayout.CENTER);
@@ -97,22 +94,21 @@ public class PParticipantes extends JPanel implements ActionListener{
         panelAbajo.setForeground( new Color(111,185, 143) );
 
         this.add(panelAbajo, BorderLayout.SOUTH);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         String comando = e.getActionCommand();
-        try {
+        try
+        {
             ventanaMenuProyectos.cambiarPanel(comando);
-        } catch (IOException e2) {
+        } 
+        catch (IOException e2)
+        {
             // TODO Auto-generated catch block
             e2.printStackTrace();
-        }
-        
+        }   
     }
-
- 
-    
 }
 

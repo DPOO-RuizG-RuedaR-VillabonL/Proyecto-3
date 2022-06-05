@@ -15,9 +15,12 @@ import Mundo.Proyectos.Proyecto;
 
 public class VentanaMenuProyectos extends JFrame
 {
-    MenuProyectos menuProyectos;
     MenuActividades menuActividades;
+    Proyecto proyecto;
+    Participante participante;
+
     PMenuProyectos pMenuProyectos;
+    MenuProyectos menuProyectos;
     PElegirParticipante pElegirParticipante;
     PDescripcion pDescripcion;
     PParticipantes pParticipantes;
@@ -26,8 +29,6 @@ public class VentanaMenuProyectos extends JFrame
     PFin pFin;
     PAgregaTipoActividad pAgregaTipoActividad;
     PAgregarFechaF pAgregarFechaF;
-    Proyecto proyecto;
-    Participante participante;
  
     public final String MENU = "MENU";
     public final String MENUPPAL = "MENUPRINCIPAL";

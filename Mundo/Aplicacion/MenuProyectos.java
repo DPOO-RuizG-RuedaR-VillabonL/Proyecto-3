@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-
 import Mundo.Actividades.Participante;
 import Mundo.Proyectos.Proyecto;
 
@@ -70,7 +69,6 @@ public class MenuProyectos
         {
             return false;
         }
-        
     }
 
     public Boolean ejecutarAgregarParticipante(Proyecto proyecto, String nombre, String correo) 

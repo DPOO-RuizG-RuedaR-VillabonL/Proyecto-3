@@ -74,7 +74,6 @@ public class PAgregarFechaF extends JPanel implements ActionListener
         btnAceptar.addActionListener(this);
         panelAbajo.add(btnAceptar);
         this.add(panelAbajo, BorderLayout.SOUTH);
-
     }
 
     @Override
