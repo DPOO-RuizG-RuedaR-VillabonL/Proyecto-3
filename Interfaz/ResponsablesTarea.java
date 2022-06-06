@@ -42,7 +42,7 @@ public class ResponsablesTarea extends JPanel implements ActionListener
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("Participantes  "+ this.tarea.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Responsables  "+ this.tarea.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -83,7 +83,7 @@ public class ResponsablesTarea extends JPanel implements ActionListener
         this.add(panelCentral, BorderLayout.CENTER);
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
-        JButton btnMenu = new JButton("Menú Proyectos");
+        JButton btnMenu = new JButton("Menú Tarea");
         btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
