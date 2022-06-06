@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Participante implements Serializable{
+public class Participante implements Serializable
+{
     private String nombre;
     private String correo;
     private ArrayList<Actividad> actividades;
@@ -43,5 +44,4 @@ public class Participante implements Serializable{
         ReporteActividades reporteActividades = new ReporteActividades(actividades);
         this.reporteActividades = reporteActividades;
     }
-    
 }

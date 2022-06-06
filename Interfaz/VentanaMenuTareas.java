@@ -13,10 +13,11 @@ public class VentanaMenuTareas extends JFrame
     Tarea tarea;
     MenuTareas menuTareas;
     PMenuTarea pMenuTarea;
-    PParticipantesTarea pParticipantesTarea;
+    PResponsablesTarea pResponsablesTarea;
     PDescripcionTarea pDescripcionTarea;
     PFechaFinalizacionTarea pFechaFinalizacionTarea;
-    PConsultarTiempoFinalizacion pConsultarTiempoFinalizacion;
+    PConsultarTiempoRealizacionTarea pConsultarTiempoRealizacionTarea;
+    PTipoTarea pTipoTarea;
     
 
     Participante participante;
@@ -30,15 +31,15 @@ public class VentanaMenuTareas extends JFrame
     public final String VERFECHATAREA = "VERFECHATAREA";
     public final String GESTIONARACTIVIDAD = "GESTIONARACTIVIDAD";
 
-    VentanaMenuTareas(MenuTareas menuTareas, Tarea tarea)
+    VentanaMenuTareas(MenuTareas menuTareas, Tarea tarea) throws FileNotFoundException, IOException
     {
         this.menuTareas = menuTareas;
         this.tarea = tarea;
         pMenuTarea = new PMenuTarea(this, tarea);
         pDescripcionTarea = new PDescripcionTarea(this, tarea);
         pFechaFinalizacionTarea = new PFechaFinalizacionTarea(this, tarea);
-        pConsultarTiempoFinalizacion = new PConsultarTiempoFinalizacion(this, tarea);
-        pParticipantesTarea = new PParticipantesTarea(this, tarea);
+        pConsultarTiempoRealizacionTarea = new PConsultarTiempoRealizacionTarea(this, tarea);
+        pResponsablesTarea = new PResponsablesTarea(this, tarea);
 
         setTitle("Menu Tareas");
         this.setExtendedState(MAXIMIZED_BOTH);
@@ -53,15 +54,20 @@ public class VentanaMenuTareas extends JFrame
         {
             this.remove(pFechaFinalizacionTarea);
             this.remove(pDescripcionTarea);
-            this.remove(pConsultarTiempoFinalizacion);
+            this.remove(pConsultarTiempoRealizacionTarea);
             this.remove(pFechaFinalizacionTarea);
             this.add(pMenuTarea);
         }
         else if(comando == RESPONSABLES)
         {
-            pParticipantesTarea = new PParticipantesTarea(this, tarea);
+            pResponsablesTarea = new PResponsablesTarea(this, tarea);
             this.remove(pMenuTarea);
-            this.add(pParticipantesTarea);
+            this.add(pResponsablesTarea);
+        }
+        else if(comando == TIPO)
+        {
+            this.remove(pMenuTarea);
+            this.add(pTipoTarea);
         }
         else if(comando == DESCRIPCION)
         {
@@ -76,7 +82,7 @@ public class VentanaMenuTareas extends JFrame
         else if(comando == VERTIEMPOTAREA)
         {
             this.remove(pMenuTarea);
-            this.add(pConsultarTiempoFinalizacion);
+            this.add(pConsultarTiempoRealizacionTarea);
         }
     }
 }

@@ -17,8 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 
-public class PInicio extends JPanel implements ActionListener
-{
+public class PFinProyecto extends JPanel implements ActionListener{
     private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -35,16 +34,17 @@ public class PInicio extends JPanel implements ActionListener
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
 
-    public PInicio (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto)
-    {
+    public PFinProyecto (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
         this.ventanaMenuProyectos = ventanaMenuProyectos;
         this.proyecto = proyecto;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
 
+        
+
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("Fecha Inicio  "+ this.proyecto.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Fecha finalización  "+ this.proyecto.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -53,7 +53,6 @@ public class PInicio extends JPanel implements ActionListener
         this.add(titulo, BorderLayout.NORTH);
 
         //se crea un panel central de una columna y dos filas 
-        //se crea un panel central de una columna y dos filas 
         panelCentral = new JPanel(); 
         GridLayout grid1 = new GridLayout(9, 1, 0, 10);
         panelCentral.setLayout(grid1);
@@ -61,9 +60,13 @@ public class PInicio extends JPanel implements ActionListener
 
         //se crea texto instrucción, boton1 y boton2 y se añaden al panel central
 
-        LocalDate FechaInicio = proyecto.getFechaInicial();//For reference
+        LocalDate FechaInicio = proyecto.getFechaFinal();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
         String Inicio = FechaInicio.format(formatter);
+        if (FechaInicio.equals(LocalDate.of(3022, 12, 31))){
+            Inicio = "No se ha añadido una fecha final para este proyecto";
+        }
+        
 
         JLabel instruccion = new JLabel(Inicio, SwingConstants.CENTER);
         instruccion.setOpaque(true);
@@ -86,20 +89,22 @@ public class PInicio extends JPanel implements ActionListener
         panelAbajo.setForeground( new Color(111,185, 143) );
 
         this.add(panelAbajo, BorderLayout.SOUTH);
+
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
-    {
+    public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-        try
-        {
+        try {
             ventanaMenuProyectos.cambiarPanel(comando);
-        } 
-        catch (IOException e2)
-        {
+        } catch (IOException e2) {
             // TODO Auto-generated catch block
             e2.printStackTrace();
         }
-    }   
+        
+    }
+
+ 
+    
 }
+

@@ -59,16 +59,12 @@ public class PMenuActividades extends JPanel implements ActionListener{
         //se crean las margenes y se agrega el panel central al panel principal
         panelCentral.setBorder(new EmptyBorder(0, 120 , 0, 120 ));
         this.add(panelCentral, BorderLayout.CENTER);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         String comando = e.getActionCommand();
         ventanaMenuActividades.cambiarPanel(comando);
-        
     }
-
- 
-    
 }

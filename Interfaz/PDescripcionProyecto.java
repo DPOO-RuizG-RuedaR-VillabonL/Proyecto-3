@@ -1,6 +1,5 @@
 package Interfaz;
 
-
 import java.awt.*;
 
 import javax.swing.JButton; 
@@ -37,8 +36,6 @@ public class PDescripcionProyecto extends JPanel implements ActionListener{
         this.proyecto = proyecto;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
-
-        
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
@@ -78,22 +75,21 @@ public class PDescripcionProyecto extends JPanel implements ActionListener{
         panelAbajo.setForeground( new Color(111,185, 143) );
 
         this.add(panelAbajo, BorderLayout.SOUTH);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
         String comando = e.getActionCommand();
-        try {
+        try
+        {
             ventanaMenuProyectos.cambiarPanel(comando);
-        } catch (IOException e2) {
+        } 
+        catch (IOException e2)
+        {
             // TODO Auto-generated catch block
             e2.printStackTrace();
-        }
-        
+        }   
     }
-
- 
-    
 }
 

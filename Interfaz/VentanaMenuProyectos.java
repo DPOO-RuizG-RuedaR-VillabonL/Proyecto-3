@@ -23,7 +23,7 @@ public class VentanaMenuProyectos extends JFrame{
     PParticipantes pParticipantes;
     PAgregarParticipante pAgregarParticipante;
     PInicio pInicio;
-    PFin pFin;
+    PFinProyecto pFin;
     PAgregaTipoActividad pAgregaTipoActividad;
     PAgregarFechaF pAgregarFechaF;
     PPaquetesTrabajo pPaquetesTrabajo;
@@ -45,14 +45,15 @@ public class VentanaMenuProyectos extends JFrame{
     public final String AGREGAR_PAQUETES = "AGREGAR_P";
     public final String GESTIONAR = "GESTIONAR";
 
-    VentanaMenuProyectos(MenuProyectos menuProyectos, Proyecto proyecto) throws FileNotFoundException, IOException{
+    VentanaMenuProyectos(MenuProyectos menuProyectos, Proyecto proyecto) throws FileNotFoundException, IOException
+    {
         this.menuProyectos = menuProyectos;
         this.proyecto = proyecto;
         pMenuProyectos = new PMenuProyectos(this, proyecto);
         pDescripcion = new PDescripcionProyecto(this, proyecto);
         pParticipantes = new PParticipantes(this, proyecto);
         pInicio = new PInicio(this, proyecto);
-        pFin = new PFin(this, proyecto);
+        pFin = new PFinProyecto(this, proyecto);
         pAgregarParticipante = new PAgregarParticipante(this, proyecto);
         pAgregaTipoActividad = new PAgregaTipoActividad(this);
         pAgregarFechaF = new PAgregarFechaF(this, proyecto);
@@ -81,11 +82,13 @@ public class VentanaMenuProyectos extends JFrame{
             this.remove(pAgregarPTrabajo);
             this.remove(PElegirPTrabajo);
             this.add(pMenuProyectos);
-
-        }else if (comando == MENUPPAL){
+        }
+        else if (comando == MENUPPAL)
+        {
             this.setVisible(false);
-
-        }else if (comando == GESTIONAR){
+        }
+        else if (comando == GESTIONAR)
+        {
             this.remove(pMenuProyectos);
             PElegirPTrabajo = new PElegirPTrabajo(this, proyecto.getPaquetesTrabajo());
             this.add(PElegirPTrabajo);
@@ -93,30 +96,35 @@ public class VentanaMenuProyectos extends JFrame{
         }else if (comando == DESCRIPCION){
             this.remove(pMenuProyectos);
             this.add(pDescripcion);
-
-        }else if (comando == PARTICIPANTES){
+        }
+        else if (comando == PARTICIPANTES)
+        {
             pParticipantes = new PParticipantes(this, proyecto);
             this.remove(pMenuProyectos);
             this.add(pParticipantes);
-
-        }else if (comando == FINICIO){
+        }
+        else if (comando == FINICIO)
+        {
             this.remove(pMenuProyectos);
             this.add(pInicio);
 
         }else if (comando == FFIN ){
-            pFin = new PFin(this, proyecto);
+            pFin = new PFinProyecto(this, proyecto);
             this.remove(pMenuProyectos);
             this.add(pFin);
-
-        }else if (comando == AGREGAR_PARTICIPANTES ){
+        }
+        else if (comando == AGREGAR_PARTICIPANTES)
+        {
             this.remove(pMenuProyectos);
             this.add(pAgregarParticipante);
-        
-        }else if (comando == AGREGAR_TIPO ){
+        }
+        else if (comando == AGREGAR_TIPO)
+        {
             this.remove(pMenuProyectos);
             this.add(pAgregaTipoActividad);
-        
-        }else if (comando == MODIFICAR_FIN ){
+        }
+        else if (comando == MODIFICAR_FIN)
+        {
             this.remove(pMenuProyectos);
             this.add(pAgregarFechaF);
         
@@ -137,7 +145,8 @@ public class VentanaMenuProyectos extends JFrame{
 
     public void cambiarFechaFinalizacion(String fecha) throws FileNotFoundException, IOException {
         Boolean respuesta = menuProyectos.cambiarFechaFinalizacion(proyecto, fecha);
-        if (respuesta==true){
+        if (respuesta==true)
+        {
             JOptionPane.showMessageDialog(pAgregarParticipante, "La fecha fue cambiada exitosamente",
 				"Fecha de Finalización Agregada", JOptionPane.INFORMATION_MESSAGE);     
         }
@@ -186,11 +195,13 @@ public class VentanaMenuProyectos extends JFrame{
         
     public void AgregarTipo(String tipo) throws FileNotFoundException, IOException{
         Boolean respuesta = menuProyectos.ejecutarAgregarTipo(proyecto, tipo);
-        if (respuesta==true){
+        if (respuesta==true)
+        {
             JOptionPane.showMessageDialog(pAgregarParticipante, "El tipo fue añadido exitosamente",
 				"Proyecto Creado", JOptionPane.INFORMATION_MESSAGE);     
         }
-        else {
+        else
+        {
             JOptionPane.showMessageDialog(pAgregarParticipante, "No se pudo añadir el tipo",
 				"Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -216,5 +227,6 @@ public class VentanaMenuProyectos extends JFrame{
 
 
     }
+
     
 

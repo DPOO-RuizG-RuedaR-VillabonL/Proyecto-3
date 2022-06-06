@@ -21,7 +21,8 @@ public class MenuProyectos
     ArrayList<Proyecto> proyectos;
     File fichero = new File("proyectos.txt");
 
-    public MenuProyectos(){
+    public MenuProyectos()
+    {
         proyectos = new ArrayList<Proyecto>();
     }
 	
@@ -47,11 +48,11 @@ public class MenuProyectos
             nuevoProyecto.setFechaFinal(31, 12, 3022);
             proyectos.add(nuevoProyecto);
             return true;
-            
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return false;
         }
-
 	}
 
     public ArrayList<Proyecto> getProyectos() 
@@ -63,19 +64,19 @@ public class MenuProyectos
     {
         Proyecto proyecto = proyectos.get(num-1);
         return proyecto;
-        
     }
 
     public Boolean ejecutarAgregarTipo(Proyecto proyecto, String tipo) 
     {
-        try {
+        try
+        {
             proyecto.getTiposActividad().add(tipo);
             return true;
-            
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             return false;
         }
-        
     }
 
     public Boolean ejecutarAgregarParticipante(Proyecto proyecto, String nombre, String correo) throws Exception 
@@ -139,10 +140,10 @@ public class MenuProyectos
 
     }
 
-
     public void guardarProgreso() throws FileNotFoundException, IOException 
     {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero))) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fichero)))
+        {
             for (Proyecto proyecto: proyectos)
             {
                 oos.writeObject(proyecto);
@@ -150,12 +151,16 @@ public class MenuProyectos
         }
     }
 
-    public void cargarProyectos() throws FileNotFoundException, IOException, ClassNotFoundException {
-
-        if (fichero.exists()){
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero))) {
-                while(true){
-                    try{
+    public void cargarProyectos() throws FileNotFoundException, IOException, ClassNotFoundException
+    {
+        if (fichero.exists())
+        {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero)))
+        {
+                while(true)
+                {
+                    try
+                    {
                         Proyecto proyecto = (Proyecto) ois.readObject();
                         proyectos.add(proyecto);
                     }
@@ -165,7 +170,10 @@ public class MenuProyectos
                     }
                 }
             }
-        }}
+        }
+    }
     
-
+    public void generarReporte(Proyecto proyecto)
+    {
+    }
 }

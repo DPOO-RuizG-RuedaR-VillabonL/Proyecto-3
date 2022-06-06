@@ -13,71 +13,111 @@ public class Actividad implements Serializable
     private String titulo;
     private String descripcion;
     private String tipo;
-    private double duracion;
+    private double duracionSegundos;
+    private Participante participante;
+    private List<ArrayList<LocalDate>> listaFechas;
+    private List<ArrayList<LocalTime>> listaTiempos;
 
     public Actividad(String titulo, String descripcion, String tipo, List<ArrayList<LocalDate>> listaFechas,
-            List<ArrayList<LocalTime>> listaTiempos) 
-            {
-                this.titulo = titulo;
-                this.descripcion = descripcion;
-                this.tipo = tipo;
-                this.duracion = duracion(listaFechas, listaTiempos);
-            }
+            List<ArrayList<LocalTime>> listaTiempos, Participante participante) 
+    {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.tipo = tipo;
+        this.duracionSegundos = duracionSegundos(listaFechas, listaTiempos);
+        this.participante = participante;
+        this.listaFechas = listaFechas;
+        this.listaTiempos = listaTiempos;
+    }
         
-    public String getTitulo(){
+    public String getTitulo()
+    {
         return titulo;
     }
 
-    public String getDescripcion(){
+    public String getDescripcion()
+    {
         return descripcion;
     }
 
-    public String getTipo(){
+    public String getTipo()
+    {
         return tipo;
     }
 
-    public double getDuracion() {
-        return duracion;
+    public double getDuracionSegundos()
+    {
+        return duracionSegundos;
     }
 
-    private double duracion(List<ArrayList<LocalDate>> listaFechas,List<ArrayList<LocalTime>> listaTiempos)
+    public Participante getParticipante()
     {
-        /** creacion de iterators */
+        return participante;
+    }
+
+    public List<ArrayList<LocalDate>> getListFecha()
+    {
+        return listaFechas;
+    }
+
+    public List<ArrayList<LocalTime>> getListTiempo()
+    {
+        return listaTiempos;
+    }
+
+    private double duracionSegundos(List<ArrayList<LocalDate>> listaFechas,List<ArrayList<LocalTime>> listaTiempos)
+    {
+        /** Creacion de iterators */
         Iterator <ArrayList<LocalDate>> itFecha = listaFechas.iterator();
         Iterator<ArrayList<LocalTime>> itHora = listaTiempos.iterator();
 
-        /** inicializacion de duracion */
-        double duracion = 0.;
-        ArrayList<LocalDate> fechass = itFecha.next();
-        ArrayList<LocalTime> horass = itHora.next();
-        LocalDate fechaIns = fechass.get(0);
-        LocalDate fechaFins = fechass.get(1);
-        LocalTime horaIns = horass.get(0);
-        LocalTime horaFins = horass.get(1);
-        double fechasss = (double) fechaIns.until(fechaFins, ChronoUnit.DAYS);
-        double horasss = (double) horaIns.until(horaFins, ChronoUnit.SECONDS);
-        double diffFechas = fechasss * 86400;
-        double diffHoras = horasss;
-        double diffs = diffFechas + diffHoras;
-        duracion = diffs;
+        /** Inicializacion de duracion */
+        double duracionSegundos = 0.;
+
+        /** Solucion problema de reduccion de tiempo */
+        /** Iterar las listas */
+        ArrayList<LocalDate> fechas = itFecha.next();
+        ArrayList<LocalTime> horas = itHora.next();
+
+        /** Obtencion del tiempo total tardado en la actividad */
+        LocalDate fechaInicial = fechas.get(0);
+        LocalDate fechaFinal = fechas.get(1);
+        LocalTime horaInicial = horas.get(0);
+        LocalTime horaFinal = horas.get(1);
+
+        /** Diferencia de fechas y hora en dias y segundos */
+        double fechaDiffInicialFinal = (double) fechaInicial.until(fechaFinal, ChronoUnit.DAYS);
+        double horaDiffInicialFinal = (double) horaInicial.until(horaFinal, ChronoUnit.SECONDS);
+
+        /** Pasar dias a segundos */
+        double diffFechas = fechaDiffInicialFinal * 86400;
+        double diffHoras = horaDiffInicialFinal;
+        double diffsSegundos = diffFechas + diffHoras;
+        duracionSegundos = diffsSegundos;
 
         while(itFecha.hasNext())
         {
-            ArrayList<LocalDate> fechas = itFecha.next();
-            ArrayList<LocalTime> horas = itHora.next();
-            LocalDate fechaIn = fechas.get(0);
-            LocalDate fechaFin = fechas.get(1);
-            LocalTime horaIn = horas.get(0);
-            LocalTime horaFin = horas.get(1);
-            double fecha = (double) fechaIn.until(fechaFin, ChronoUnit.DAYS);
-            double hora = (double) horaIn.until(horaFin, ChronoUnit.SECONDS);
-            double diffFecha = fecha * 86400;
-            double diffHora = hora;
-            double diff = diffFecha + diffHora;
-            duracion = duracion - diff;
+            /** Reduccion de la duraccion al tiempo real tardado */
+            /** Iteracion de fechas y horas */
+            ArrayList<LocalDate> fecha = itFecha.next();
+            ArrayList<LocalTime> hora = itHora.next();
+
+            /** Obtencion del tiempo de parada y de finalizacion */
+            LocalDate fechaInicialIterador = fecha.get(0);
+            LocalDate fechaFinalIterador = fecha.get(1);
+            LocalTime horaInicialIterador = hora.get(0);
+            LocalTime horaFinalIterador = hora.get(1);
+
+            /** Diferencia de fechas y tiempos en dias y segundos */
+            double fechaDiffParadaInicialFinal = (double) fechaInicialIterador.until(fechaFinalIterador, ChronoUnit.DAYS);
+            double horaDiffParadaInicialFinal = (double) horaInicialIterador.until(horaFinalIterador, ChronoUnit.SECONDS);
+
+            /** Pasar dias a segundos */
+            double diffFechaParada = fechaDiffParadaInicialFinal * 86400;
+            double diffHoraParada = horaDiffParadaInicialFinal;
+            double diffSegundosParadas = diffFechaParada + diffHoraParada;
+            duracionSegundos = duracionSegundos - diffSegundosParadas;
         }
-
-        return duracion;
+        return duracionSegundos;
     }
-
 }

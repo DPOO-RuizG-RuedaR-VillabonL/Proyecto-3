@@ -5,35 +5,39 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Font;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JFormattedTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class PPausas extends JPanel implements ActionListener
 {
     /* creacion paneles **/
-    private VentanaMenuActividades ventanaMenuActividades;
-    private JLabel label;
-    private JPanel panelCentral;
-    private JPanel panelAbajo;
+    VentanaMenuActividades ventanaMenuActividades;
+    JLabel label;
+    JPanel panelCentral;
+    JPanel panelAbajo;
 
     /** Creacion Variables */
 
-    private JFormattedTextField textoFechaInicial;
-    private JFormattedTextField textoHoraInicial;
-    private JFormattedTextField textoFechaFinal;
-    private JFormattedTextField textoHoraFinal;
-    private ArrayList<String> fecha0 = new ArrayList<String>();
-    private ArrayList<String> hora0 = new ArrayList<String>();
+    JTextField textoFechaInicial;
+    JTextField textoHoraInicial;
+    JTextField textoFechaFinal;
+    JTextField textoHoraFinal;
+    ArrayList<LocalDate> fecha0 = new ArrayList<LocalDate>();
+    ArrayList<LocalTime> hora0 = new ArrayList<LocalTime>();
 
     public final String TERMINADO = "ACEPTAR"; 
+    public final String CREAR = "CREAR";
+
 
     public PPausas(VentanaMenuActividades ventanaMenuActividades)
     {
@@ -55,32 +59,34 @@ public class PPausas extends JPanel implements ActionListener
         panelCentral.setLayout(grid);
             
         /** Fecha inicio */
-        textoFechaInicial = new JFormattedTextField(new SimpleDateFormat("yyyy-MM-dd"));
+        textoFechaInicial = new JTextField();
         textoFechaInicial.setText("aaaa-mm-dd");
         JLabel lblFechaInicio = new JLabel("Ingrese la fecha de inicio", SwingConstants.LEFT);
         lblFechaInicio.setBackground(new Color(02,28, 30) ); //fondo principal
         lblFechaInicio.setForeground( new Color(111,185, 143) );
 
         /** Hora inicio */
-        textoHoraInicial = new JFormattedTextField(new SimpleDateFormat("hh-MM-ss"));
-        textoHoraInicial.setText("hh-mm-ss");
+        textoHoraInicial = new JTextField();
+        textoHoraInicial.setText("hh:mm:ss");
         JLabel lblHoraInicial = new JLabel("Ingrese la hora de inicio", SwingConstants.LEFT);
         lblHoraInicial.setBackground(new Color(02,28, 30) ); //fondo principal
         lblHoraInicial.setForeground( new Color(111,185, 143) );
 
         /** Fecha final */
-        textoFechaFinal = new JFormattedTextField(new SimpleDateFormat("yyyy-MM-dd"));
+        textoFechaFinal = new JTextField();
         textoFechaFinal.setText("aaaa-mm-dd");
         JLabel lblFechaFinal = new JLabel("Ingrese la fecha de finalizacion", SwingConstants.LEFT);
         lblFechaFinal.setBackground(new Color(02,28, 30) ); //fondo principal
         lblFechaFinal.setForeground( new Color(111,185, 143) );
 
         /** Hora final */
-        textoHoraFinal = new JFormattedTextField(new SimpleDateFormat("hh-MM-ss"));
-        textoHoraFinal.setText("hh-mm-ss");
+        textoHoraFinal = new JTextField();
+        textoHoraFinal.setText("hh:mm:ss");
         JLabel lblHoraFinal = new JLabel("Ingrese la hora de finalizacion", SwingConstants.LEFT);
         lblHoraFinal.setBackground(new Color(02,28, 30) ); //fondo principal
         lblHoraFinal.setForeground( new Color(111,185, 143) );
+
+        panelCentral.setBorder(new EmptyBorder(50, 100, 50, 50));
 
         panelCentral.add(lblFechaInicio);
         panelCentral.add(textoFechaInicial);
@@ -106,12 +112,12 @@ public class PPausas extends JPanel implements ActionListener
         this.add(panelAbajo, BorderLayout.SOUTH);
     }
 
-    public ArrayList<String> getListFecha()
+    public ArrayList<LocalDate> getListFecha()
     {
         return fecha0;
     }
 
-    public ArrayList<String> getListHora()
+    public ArrayList<LocalTime> getListHora()
     {
         return hora0;
     }
@@ -129,13 +135,26 @@ public class PPausas extends JPanel implements ActionListener
             String fechaFinal = textoFechaFinal.getText();
             String horaFinal = textoHoraFinal.getText();
 
-            /** Listas de listas */
+            if (fechaInicial.length()==0 || horaInicial.length()==0 || fechaFinal.length()==0 
+                || horaFinal.length()==0)
+            {
+                JOptionPane.showMessageDialog(panelCentral, "Por favor escriba en todos los campos antes de continuar",
+                "Error", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                /** Listas de listas */
+                LocalDate fechaIni = LocalDate.parse(fechaInicial);
+                fecha0.add(fechaIni);
+                LocalDate fechaFin = LocalDate.parse(fechaFinal);
+                fecha0.add(fechaFin);
 
-            fecha0.add(fechaInicial);
-            fecha0.add(fechaFinal);
-
-            hora0.add(horaInicial);
-            hora0.add(horaFinal);
+                LocalTime horaIni = LocalTime.parse(horaInicial);
+                hora0.add(horaIni);
+                LocalTime horaFin = LocalTime.parse(horaFinal);
+                hora0.add(horaFin);
+            }
+            ventanaMenuActividades.cambiarPanel(CREAR);
         }
     }
 }

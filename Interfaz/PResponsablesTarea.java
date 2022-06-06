@@ -1,50 +1,48 @@
 package Interfaz;
 
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton; 
 import javax.swing.JLabel;
 import javax.swing.border.*;
 
 import Mundo.Actividades.Participante;
-import Mundo.Proyectos.Proyecto;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.ArrayList;
+import Mundo.Proyectos.Tarea;
 
 import javax.swing.*;
 
-public class PParticipantes extends JPanel implements ActionListener
+import javax.swing.JPanel;
+
+public class PResponsablesTarea extends JPanel implements ActionListener
 {
-    private VentanaMenuProyectos ventanaMenuProyectos;
+    private VentanaMenuTareas ventanaMenuTareas;
+    ArrayList<Participante> Responsables;
     private JPanel panelCentral;
     private JPanel panelAbajo;
-    private Proyecto proyecto;
-
-    public final String MENUPPAL = "MENUPRINCIPAL";
-    public final String MENU = "MENU";
-    public final String AGREGAR_PARTICIPANTES = "AGREGARPARTICIPANTES";
-    public final String AGREGAR_TIPO = "AGREGARTIPO";
+    private Tarea tarea;
+    public final String CREAR = "CREAR";
     public final String GESTIONAR = "GESTIONAR";
-    public final String MODIFICAR_FIN = "MODIFICARFIN";
-    public final String DESCRIPCION = "DESCRIPCION";
-    public final String PARTICIPANTES = "PARTICIPANTES";
-    public final String FINICIO = "F_INICIO";
-    public final String FFIN = "F_FIN";
+    public final String MENU = "MENU"; 
+    public final String GUARDAR = "GUARDAR";
 
-    public PParticipantes (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto)
-    {
-        this.ventanaMenuProyectos = ventanaMenuProyectos;
-        this.proyecto = proyecto;
+
+    public PResponsablesTarea(VentanaMenuTareas ventanaMenuTareas, Tarea tarea) throws FileNotFoundException, IOException {
+        this.tarea = tarea;
+        this.ventanaMenuTareas = ventanaMenuTareas;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("Participantes  "+ this.proyecto.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Responsables  "+ this.tarea.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -59,7 +57,7 @@ public class PParticipantes extends JPanel implements ActionListener
         panelCentral.setBackground(new Color(02,28, 30) ); //fondo color principal
 
         //se crea texto nombre al panel central
-        ArrayList<Participante> participantes = proyecto.getParticipantes();
+        ArrayList<Participante> participantes = tarea.getResponsables();
         int i;
         for (i = 0; i < participantes.size(); i++)
         {
@@ -85,7 +83,7 @@ public class PParticipantes extends JPanel implements ActionListener
         this.add(panelCentral, BorderLayout.CENTER);
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
-        JButton btnMenu = new JButton("Menú Proyectos");
+        JButton btnMenu = new JButton("Menú Tarea");
         btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
@@ -96,19 +94,20 @@ public class PParticipantes extends JPanel implements ActionListener
         this.add(panelAbajo, BorderLayout.SOUTH);
     }
 
+
     @Override
     public void actionPerformed(ActionEvent e)
     {
         String comando = e.getActionCommand();
         try
         {
-            ventanaMenuProyectos.cambiarPanel(comando);
-        } 
-        catch (IOException e2)
-        {
+            ventanaMenuTareas.cambiarPanel(comando);
+        }
+        catch (IOException e1) {
             // TODO Auto-generated catch block
-            e2.printStackTrace();
-        }   
+            e1.printStackTrace();
+        }
+        
     }
-}
 
+}   

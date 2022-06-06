@@ -3,7 +3,8 @@ package Interfaz;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.Font;
@@ -31,10 +32,10 @@ public class PCrearActividad extends JPanel implements ActionListener
     private JTextField textoTitulo;
     private JTextField textoDescripcion;
     private JTextField textoTipo;
-    private JFormattedTextField textoFechaInicial;
-    private JFormattedTextField textoHoraInicial;
-    private JFormattedTextField textoFechaFinal;
-    private JFormattedTextField textoHoraFinal;
+    private JTextField textoFechaInicial;
+    private JTextField textoHoraInicial;
+    private JTextField textoFechaFinal;
+    private JTextField textoHoraFinal;
     private JFormattedTextField textoPausas;
 
     public final String MENU = "MENU";
@@ -79,36 +80,35 @@ public class PCrearActividad extends JPanel implements ActionListener
         lblTipo.setForeground( new Color(111,185, 143) );
 
         /** Fecha inicio */
-        textoFechaInicial = new JFormattedTextField(new SimpleDateFormat("yyyy-MM-dd"));
+        textoFechaInicial = new JTextField();
         textoFechaInicial.setText("aaaa-mm-dd");
         JLabel lblFechaInicio = new JLabel("Ingrese la fecha de inicio", SwingConstants.LEFT);
         lblFechaInicio.setBackground(new Color(02,28, 30) ); //fondo principal
         lblFechaInicio.setForeground( new Color(111,185, 143) );
 
         /** Hora inicio */
-        textoHoraInicial = new JFormattedTextField(new SimpleDateFormat("hh-MM-ss"));
-        textoHoraInicial.setText("hh-mm-ss");
+        textoHoraInicial = new JTextField();
+        textoHoraInicial.setText("hh:mm:ss");
         JLabel lblHoraInicial = new JLabel("Ingrese la hora de inicio", SwingConstants.LEFT);
         lblHoraInicial.setBackground(new Color(02,28, 30) ); //fondo principal
         lblHoraInicial.setForeground( new Color(111,185, 143) );
 
         /** Fecha final */
-        textoFechaFinal = new JFormattedTextField(new SimpleDateFormat("yyyy-MM-dd"));
+        textoFechaFinal = new JTextField();
         textoFechaFinal.setText("aaaa-mm-dd");
         JLabel lblFechaFinal = new JLabel("Ingrese la fecha de finalizacion", SwingConstants.LEFT);
         lblFechaFinal.setBackground(new Color(02,28, 30) ); //fondo principal
         lblFechaFinal.setForeground( new Color(111,185, 143) );
 
         /** Hora final */
-        textoHoraFinal = new JFormattedTextField(new SimpleDateFormat("hh-MM-ss"));
-        textoHoraFinal.setText("hh-mm-ss");
+        textoHoraFinal = new JTextField();
+        textoHoraFinal.setText("hh:mm:ss");
         JLabel lblHoraFinal = new JLabel("Ingrese la hora de finalizacion", SwingConstants.LEFT);
         lblHoraFinal.setBackground(new Color(02,28, 30) ); //fondo principal
         lblHoraFinal.setForeground( new Color(111,185, 143) );
 
         /** Pausas */
         textoPausas = new JFormattedTextField();
-        textoPausas.setVisible(false);
         JLabel lblPausas = new JLabel("Ingrese la cantidad de pausas realizadas", SwingConstants.LEFT);
         lblPausas.setBackground(new Color(02,28, 30) );
         lblPausas.setForeground( new Color(111,185, 143) );
@@ -121,6 +121,7 @@ public class PCrearActividad extends JPanel implements ActionListener
         panelCentral.add(textoDescripcion);
         panelCentral.add(lblTipo);
         panelCentral.add(textoTipo);
+
         panelCentral.add(lblFechaInicio);
         panelCentral.add(textoFechaInicial);
         panelCentral.add(lblHoraInicial);
@@ -129,6 +130,7 @@ public class PCrearActividad extends JPanel implements ActionListener
         panelCentral.add(textoFechaFinal);
         panelCentral.add(lblHoraFinal);
         panelCentral.add(textoHoraFinal);
+
         panelCentral.add(lblPausas);
         panelCentral.add(textoPausas);
  
@@ -161,38 +163,45 @@ public class PCrearActividad extends JPanel implements ActionListener
             /** Creacion Variables */
             String titulo = textoTitulo.getText();
             String descripcion = textoDescripcion.getText();
-            String participante = textoTipo.getText();
+            String tipo = textoTipo.getText();
+
             String fechaInicial = textoFechaInicial.getText();
             String horaInicial = textoHoraInicial.getText();
             String fechaFinal = textoFechaFinal.getText();
             String horaFinal = textoHoraFinal.getText();
-            int pausas = Integer.parseInt(textoPausas.getText());
 
-            if (titulo.length()==0 || descripcion.length()==0 || participante.length()==0 || fechaInicial.length()==0 || horaInicial.length()==0 || fechaFinal.length()==0 || horaFinal.length()==0 || textoPausas.getText().length()==0)
+            String pausas = textoPausas.getText();
+            int cantidadPausas = Integer.parseInt(pausas);
+
+            if (titulo.length()==0 || descripcion.length()==0 || tipo.length()==0 || fechaInicial.length()==0 || 
+                horaInicial.length()==0 || fechaFinal.length()==0 || horaFinal.length()==0 || textoPausas.getText().length()==0)
             {
                 JOptionPane.showMessageDialog(panelCentral, "Por favor escriba en todos los campos antes de continuar",
                 "Error", JOptionPane.INFORMATION_MESSAGE);
             }
-            else if (pausas > 0)
+            else if (cantidadPausas > 0)
             {
                 /** Listas de listas */
-                ArrayList<String> fecha0 = new ArrayList<String>();
-                ArrayList<String> hora0 = new ArrayList<String>();
+                ArrayList<LocalDate> fecha0 = new ArrayList<LocalDate>();
+                ArrayList<LocalTime> hora0 = new ArrayList<LocalTime>();
 
-                fecha0.add(fechaInicial);
-                fecha0.add(fechaFinal);
+                LocalDate fechaIni = LocalDate.parse(fechaInicial);
+                fecha0.add(fechaIni);
+                LocalDate fechaFin = LocalDate.parse(fechaFinal);
+                fecha0.add(fechaFin);
 
-                hora0.add(horaInicial);
-                hora0.add(horaFinal);
+                LocalTime horaIni = LocalTime.parse(horaInicial);
+                hora0.add(horaIni);
+                LocalTime horaFin = LocalTime.parse(horaFinal);
+                hora0.add(horaFin);
 
-                List<ArrayList<String>> listaFechas = new ArrayList<ArrayList<String>>();
-                List<ArrayList<String>> listaHoras = new ArrayList<ArrayList<String>>();
+                List<ArrayList<LocalDate>> listaFechas = new ArrayList<ArrayList<LocalDate>>();
+                List<ArrayList<LocalTime>> listaHoras = new ArrayList<ArrayList<LocalTime>>();
 
                 listaFechas.add(fecha0);
                 listaHoras.add(hora0);
-
                 int i = 0;
-                while (i < pausas)
+                while (i <= cantidadPausas)
                 {
                     ventanaMenuActividades.cambiarPanel(PAUSAS);
                     PPausas pPausas = new PPausas(ventanaMenuActividades);
@@ -200,8 +209,36 @@ public class PCrearActividad extends JPanel implements ActionListener
                     listaHoras.add(pPausas.getListHora());
                     i++;
                 }
-                ventanaMenuActividades.CrearActividad(titulo, descripcion, participante, listaFechas, listaHoras);
+                ventanaMenuActividades.CrearActividad(titulo, descripcion, tipo, listaFechas, listaHoras);
             }
+            else if(cantidadPausas == 0)
+            {
+                /** Listas de listas */
+                ArrayList<LocalDate> fecha0 = new ArrayList<LocalDate>();
+                ArrayList<LocalTime> hora0 = new ArrayList<LocalTime>();
+
+                LocalDate fechaIni = LocalDate.parse(fechaInicial);
+                fecha0.add(fechaIni);
+                LocalDate fechaFin = LocalDate.parse(fechaFinal);
+                fecha0.add(fechaFin);
+
+                LocalTime horaIni = LocalTime.parse(horaInicial);
+                hora0.add(horaIni);
+                LocalTime horaFin = LocalTime.parse(horaFinal);
+                hora0.add(horaFin);
+
+                List<ArrayList<LocalDate>> listaFechas = new ArrayList<ArrayList<LocalDate>>();
+                List<ArrayList<LocalTime>> listaHoras = new ArrayList<ArrayList<LocalTime>>();
+
+                listaFechas.add(fecha0);
+                listaHoras.add(hora0);
+
+                ventanaMenuActividades.CrearActividad(titulo, descripcion, tipo, listaFechas, listaHoras);
+            }
+        }
+        else if (comando==MENU)
+        {
+            ventanaMenuActividades.cambiarPanel(MENU);
         }
     }
 }
