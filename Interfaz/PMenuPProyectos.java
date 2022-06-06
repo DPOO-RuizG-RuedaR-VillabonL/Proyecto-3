@@ -6,9 +6,9 @@ import java.awt.Color;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 import javax.swing.JButton; 
 import javax.swing.JLabel;
@@ -22,25 +22,26 @@ import javax.swing.JPanel;
 
 public class PMenuPProyectos extends JPanel implements ActionListener
     {
-        private VentanaMenuPrincipal ventanaMenuPrincipal;
         private JPanel panelCentral;
         private JPanel panelAbajo;
-        private VentanaMenuPProyectos ventanaMenuPProyectos;
+        private VentanaMenuPTrabajo ventanaMenuPTrabajo;
+        private PaqueteTrabajo paqueteTrabajo;
 
-        public final String MENUPPAL = "MENUPRINCIPAL";
+        public final String MENU = "MENU";
         public final String CREAR = "CREAR";
         public final String AGREGAR_TAREA = "AGREGARPTAREA";
         public final String CONSULTAR_TAREA = "CONSULTARTAREA";
         public final String DESCRIPCIONPP = "DESCRIPCIONPP";
         public final String GUARDAR = "GUARDAR";
         
-        public PMenuPProyectos(VentanaMenuPProyectos ventanaMenuPProyectos) {
-        this.ventanaMenuPProyectos = ventanaMenuPProyectos;
+        public PMenuPProyectos(VentanaMenuPTrabajo ventanaMenuPTrabajo, PaqueteTrabajo paquete) {
+        this.ventanaMenuPTrabajo = ventanaMenuPTrabajo;
+        this.paqueteTrabajo = paquete;
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("Gestionar "+ this.ventanaMenuPProyectos.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Gestionar "+ this.paqueteTrabajo.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -87,8 +88,8 @@ public class PMenuPProyectos extends JPanel implements ActionListener
         this.add(panelCentral, BorderLayout.CENTER);
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
-        JButton btnMenu = new JButton("Menú Principal");
-        btnMenu.setActionCommand(MENUPPAL);
+        JButton btnMenu = new JButton("Menú Proyectos");
+        btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
         panelAbajo.setBorder(new EmptyBorder(50, 0, 50, 0));
@@ -102,12 +103,13 @@ public class PMenuPProyectos extends JPanel implements ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        /*String comando = e.getActionCommand();
+        String comando = e.getActionCommand();
         try {
-            ventanaMenuPrincipal.cambiarPanel(comando);
+            ventanaMenuPTrabajo.cambiarPanel(comando);
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
-        }*/}
+        }
+    }
     
 }

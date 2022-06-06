@@ -17,7 +17,7 @@ import java.io.IOException;
 import javax.swing.*;
 
 public class PDescripcionPP extends JPanel implements ActionListener{
-    private VentanaMenuProyectos ventanaMenuProyectos;
+    private VentanaMenuPTrabajo ventanaMenuPTrabajo;
     private JPanel panelCentral;
     private JPanel panelAbajo;
     private PaqueteTrabajo paquete;
@@ -34,8 +34,8 @@ public class PDescripcionPP extends JPanel implements ActionListener{
     public final String FFIN = "F_FIN";
     
 
-    public PDescripcionPP (VentanaMenuProyectos ventanaMenuProyectos, PaqueteTrabajo paquete) {
-        this.ventanaMenuProyectos = ventanaMenuProyectos;
+    public PDescripcionPP (VentanaMenuPTrabajo ventanaMenuPTrabajo, PaqueteTrabajo paquete) {
+        this.ventanaMenuPTrabajo = ventanaMenuPTrabajo;
         this.paquete = paquete;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
@@ -54,7 +54,7 @@ public class PDescripcionPP extends JPanel implements ActionListener{
 
         //se crea un panel central de una columna y dos filas 
         panelCentral = new JPanel(); 
-        GridLayout grid1 = new GridLayout(9, 1, 0, 10);
+        GridLayout grid1 = new GridLayout(1, 1, 0, 10);
         panelCentral.setLayout(grid1);
         panelCentral.setBackground(new Color(02,28, 30) ); //fondo color principal
 
@@ -83,14 +83,14 @@ public class PDescripcionPP extends JPanel implements ActionListener{
 
     }
 
-    public PDescripcionPP(VentanaMenuPProyectos ventanaMenuPProyectos) {
+    public PDescripcionPP(VentanaMenuPTrabajo ventanaMenuPProyectos) {
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         try {
-            ventanaMenuProyectos.cambiarPanel(comando);
+            ventanaMenuPTrabajo.cambiarPanel(comando);
         } catch (IOException e2) {
             // TODO Auto-generated catch block
             e2.printStackTrace();

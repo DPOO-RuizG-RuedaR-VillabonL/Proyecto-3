@@ -16,7 +16,7 @@ public class MenuTareas
 
     public MenuTareas(){
         tareas = new ArrayList<Tarea>();
-        this.paqueteTrabajo = paqueteTrabajo;
+        
     }
 	
 	public Boolean ejecutarCrearTarea(String nombre, String descripcion, String fechaFinalE, String tipoTarea, ArrayList<Participante> responsables, String tiposTarea)
@@ -47,6 +47,46 @@ public class MenuTareas
     }
 
     public PaqueteTrabajo elegirPaqueteTrabajo(Proyecto proyecto, int num) {
+
+        ArrayList<PaqueteTrabajo> paquetes = proyecto.getPaquetesTrabajo();
+        PaqueteTrabajo paquete = paquetes.get(num-1);
+        this.paqueteTrabajo = paquete;
+        return paquete;
+    }
+
+    public Boolean ejecutarAgregarTarea(PaqueteTrabajo paqueteTrabajo, String nombre, String descripcion, String fecha,
+            String tipo, ArrayList<Participante> responsables) throws Exception 
+    {
+        ArrayList<Tarea> tareas1 = paqueteTrabajo.getTareas();
+        Boolean encontro = false;
+        for (Tarea tarea : tareas1){
+            String nombreT = tarea.getNombre();
+            String tipoT = tarea.getTipo();
+            if (nombreT.equals(nombre) && tipoT.equals(tipo)){
+                encontro = true;
+            }
+        }
+        if (encontro == false)
+        {   
+            ArrayList<String> tiposPermitidos = paqueteTrabajo.getProyecto().getTiposTarea();
+            if (tiposPermitidos.contains(tipo)){
+                LocalDate fechaEstimada = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE );
+                Tarea nuevaTarea = new Tarea(nombre, descripcion, fechaEstimada, tipo, responsables );
+                paqueteTrabajo.agregarTarea(nuevaTarea);
+                this.tareas.add(nuevaTarea);
+                return true;
+            }
+            else{
+                throw new Exception("El tipo de tarea "+ tipo+ " no está dentro de los admitidos");
+            }
+
+        }
+        else{
+            throw new Exception("Ya existe un participante con ese nombre y correo");
+        }
+    }
+
+    public Tarea elegirTarea(PaqueteTrabajo paqueteTrabajo2, int num) {
         return null;
     }
 

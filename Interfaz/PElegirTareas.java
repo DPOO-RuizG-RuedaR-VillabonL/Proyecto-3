@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.*;
 
-import Mundo.Proyectos.PaqueteTrabajo;
+import Mundo.Proyectos.Tarea;
 
 import javax.swing.*;
 
@@ -22,18 +22,16 @@ import javax.swing.JPanel;
 
 public class PElegirTareas extends JPanel implements ActionListener
 {
-    private VentanaMenuPrincipal ventanaMenuPrincipal;
-    ArrayList<PaqueteTrabajo> paqueteTrabajos;
+    private VentanaMenuPTrabajo ventanaMenuPTrabajo;
+    ArrayList<Tarea> tareas;
     private JPanel panelCentral;
     private JPanel panelAbajo;
-    public final String CREAR = "CREAR";
-    public final String GESTIONAR = "GESTIONAR";
-    public final String MENU = "MENU"; 
-    public final String GUARDAR = "GUARDAR";
 
-    public PElegirTareas(VentanaMenuPrincipal ventanaMenuPrincipal, ArrayList<PaqueteTrabajo> paqueteTrabajos) throws FileNotFoundException, IOException {
-        this.paqueteTrabajos = paqueteTrabajos;
-        this.ventanaMenuPrincipal = ventanaMenuPrincipal;
+    public final String MENU = "MENU"; 
+
+    public PElegirTareas(VentanaMenuPTrabajo ventanaMenuPTrabajo, ArrayList<Tarea> tareas) throws FileNotFoundException, IOException {
+        this.tareas = tareas;
+        this.ventanaMenuPTrabajo = ventanaMenuPTrabajo;
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
         this.setLayout(new BorderLayout());
   
@@ -52,19 +50,19 @@ public class PElegirTareas extends JPanel implements ActionListener
         titulo.setForeground( new Color(44,120, 115) );
         this.add(titulo, BorderLayout.NORTH);
 
-        if (paqueteTrabajos.size()==0){
+        if (tareas.size()==0){
             JLabel lblError = new JLabel("Todavía no ha creado tareas para gestionar");
             lblError.setBackground(new Color(02,28, 30) );
             lblError.setForeground( new Color(111,185, 143) );
             panelCentral.add(lblError);
         }
         else {
-            for (int i=0; i<paqueteTrabajos.size(); i++){
-                PaqueteTrabajo paqueteTrabajo = paqueteTrabajos.get(i);
-                JButton boton = (new JButton(paqueteTrabajo.getNombre()));
+            for (int i=0; i<tareas.size(); i++){
+                Tarea tarea = tareas.get(i);
+                JButton boton = (new JButton(tarea.getNombre()));
                 boton.setBackground(new Color(111,185, 143)  );
                 boton.setForeground(new Color(02,28, 30) ); 
-                boton.setActionCommand("PROYECTO " + Integer.toString(i+1));
+                boton.setActionCommand("TAREA " + Integer.toString(i+1));
                 boton.addActionListener(this);
                 panelCentral.add(boton);      
         }}
@@ -77,7 +75,7 @@ public class PElegirTareas extends JPanel implements ActionListener
         panelAbajo = new JPanel();
         panelAbajo.setBackground(new Color(02,28, 30) );
         panelAbajo.setBorder(new EmptyBorder(10, 0, 30, 0));
-        JButton btnMenu = new JButton("Menú Principal");
+        JButton btnMenu = new JButton("Menú Proyectos");
         btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
@@ -87,7 +85,7 @@ public class PElegirTareas extends JPanel implements ActionListener
     }
 
 
-    public PElegirTareas(VentanaMenuPProyectos ventanaMenuPProyectos) {
+    public PElegirTareas(VentanaMenuPTrabajo ventanaMenuPProyectos) {
     }
 
 
@@ -95,7 +93,7 @@ public class PElegirTareas extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         try {
-            ventanaMenuPrincipal.cambiarPanel(comando);
+            ventanaMenuPTrabajo.cambiarPanel(comando);
         } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
