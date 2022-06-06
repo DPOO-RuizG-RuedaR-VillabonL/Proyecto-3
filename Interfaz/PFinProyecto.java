@@ -7,7 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.border.*;
 
-import Mundo.Proyectos.Tarea;
+import Mundo.Proyectos.Proyecto;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,12 +17,11 @@ import java.time.format.DateTimeFormatter;
 
 import javax.swing.*;
 
-public class PFechaFinalizacionTarea extends JPanel implements ActionListener{
+public class PFinProyecto extends JPanel implements ActionListener{
     private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
-    private Tarea tarea;
-    private VentanaMenuTareas ventanaMenuTareas;
+    private Proyecto proyecto;
 
     public final String MENUPPAL = "MENUPRINCIPAL";
     public final String MENU = "MENU";
@@ -34,14 +33,10 @@ public class PFechaFinalizacionTarea extends JPanel implements ActionListener{
     public final String PARTICIPANTES = "PARTICIPANTES";
     public final String FINICIO = "F_INICIO";
     public final String FFIN = "F_FIN";
-    
 
-    public PFechaFinalizacionTarea (VentanaMenuTareas ventanaMenuTareas, Tarea tarea) {
-        this.ventanaMenuTareas = ventanaMenuTareas;
-        this.tarea = tarea;
-    
-        this.ventanaMenuTareas = ventanaMenuTareas;
-        this.tarea = tarea;
+    public PFinProyecto (VentanaMenuProyectos ventanaMenuProyectos, Proyecto proyecto) {
+        this.ventanaMenuProyectos = ventanaMenuProyectos;
+        this.proyecto = proyecto;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
 
@@ -49,7 +44,7 @@ public class PFechaFinalizacionTarea extends JPanel implements ActionListener{
 
         BorderLayout grid = new BorderLayout();
         this.setLayout(grid);
-        JLabel titulo = new JLabel("fecha final estimada de "+ this.tarea.getNombre(), SwingConstants.CENTER);
+        JLabel titulo = new JLabel("Fecha finalización  "+ this.proyecto.getNombre(), SwingConstants.CENTER);
         titulo.setOpaque(true);
         titulo.setFont(new Font("Aharoni", Font.BOLD, 26 ));
         titulo.setBorder(new EmptyBorder(50, 0, 20, 0));
@@ -63,15 +58,17 @@ public class PFechaFinalizacionTarea extends JPanel implements ActionListener{
         panelCentral.setLayout(grid1);
         panelCentral.setBackground(new Color(02,28, 30) ); //fondo color principal
 
-        LocalDate FechaFin = tarea.getFechaFinalEstimada();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-        String fechaFin = FechaFin.format(formatter);
-        if (FechaFin.equals(LocalDate.of(3022, 12, 31))){
-            fechaFin = "No se ha añadido una fecha final para esta tarea";
-        }
-
         //se crea texto instrucción, boton1 y boton2 y se añaden al panel central
-        JLabel instruccion = new JLabel(fechaFin, SwingConstants.CENTER);
+
+        LocalDate FechaInicio = proyecto.getFechaFinal();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String Inicio = FechaInicio.format(formatter);
+        if (FechaInicio.equals(LocalDate.of(3022, 12, 31))){
+            Inicio = "No se ha añadido una fecha final para este proyecto";
+        }
+        
+
+        JLabel instruccion = new JLabel(Inicio, SwingConstants.CENTER);
         instruccion.setOpaque(true);
         instruccion.setFont(new Font("Congenial SemiBold", Font.PLAIN, 20));
         instruccion.setBackground(new Color(02,28, 30) ); //fondo principal
@@ -83,7 +80,7 @@ public class PFechaFinalizacionTarea extends JPanel implements ActionListener{
         this.add(panelCentral, BorderLayout.CENTER);
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
-        JButton btnMenu = new JButton("Menú tarea");
+        JButton btnMenu = new JButton("Menú Proyectos");
         btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
@@ -110,6 +107,4 @@ public class PFechaFinalizacionTarea extends JPanel implements ActionListener{
  
     
 }
-
-
 

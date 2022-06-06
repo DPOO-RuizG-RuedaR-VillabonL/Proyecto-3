@@ -18,7 +18,7 @@ public class VentanaMenuTareas extends JFrame
     PParticipantesTarea pParticipantesTarea;
     PDescripcionTarea pDescripcionTarea;
     PFechaFinalizacionTarea pFechaFinalizacionTarea;
-    PConsultarTiempoFinalizacion pConsultarTiempoFinalizacion;
+    PConsultarTiempoRealizacionTarea pConsultarTiempoFinalizacion;
     PTipoTarea pTipoTarea;
     
 
@@ -41,7 +41,7 @@ public class VentanaMenuTareas extends JFrame
         pMenuTarea = new PMenuTarea(this, tarea);
         pDescripcionTarea = new PDescripcionTarea(this, tarea);
         pFechaFinalizacionTarea = new PFechaFinalizacionTarea(this, tarea);
-        pConsultarTiempoFinalizacion = new PConsultarTiempoFinalizacion(this, tarea);
+        pConsultarTiempoFinalizacion = new PConsultarTiempoRealizacionTarea(this, tarea);
         pParticipantesTarea = new PParticipantesTarea(this, tarea);
 
         setTitle("Menu Tareas");

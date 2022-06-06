@@ -71,7 +71,7 @@ public class PDescripcionPP extends JPanel implements ActionListener{
         this.add(panelCentral, BorderLayout.CENTER);
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
-        JButton btnMenu = new JButton("Menú paquetes de tabajo");
+        JButton btnMenu = new JButton("Menú paquetes de trabajo");
         btnMenu.setActionCommand(MENU);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);

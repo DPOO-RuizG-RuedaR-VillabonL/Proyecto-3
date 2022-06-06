@@ -23,7 +23,7 @@ public class VentanaMenuProyectos extends JFrame{
     PParticipantes pParticipantes;
     PAgregarParticipante pAgregarParticipante;
     PInicio pInicio;
-    PFin pFin;
+    PFinProyecto pFin;
     PAgregaTipoActividad pAgregaTipoActividad;
     PAgregarFechaF pAgregarFechaF;
     PPaquetesTrabajo pPaquetesTrabajo;
@@ -53,7 +53,7 @@ public class VentanaMenuProyectos extends JFrame{
         pDescripcion = new PDescripcionProyecto(this, proyecto);
         pParticipantes = new PParticipantes(this, proyecto);
         pInicio = new PInicio(this, proyecto);
-        pFin = new PFin(this, proyecto);
+        pFin = new PFinProyecto(this, proyecto);
         pAgregarParticipante = new PAgregarParticipante(this, proyecto);
         pAgregaTipoActividad = new PAgregaTipoActividad(this);
         pAgregarFechaF = new PAgregarFechaF(this, proyecto);
@@ -109,7 +109,7 @@ public class VentanaMenuProyectos extends JFrame{
             this.add(pInicio);
 
         }else if (comando == FFIN ){
-            pFin = new PFin(this, proyecto);
+            pFin = new PFinProyecto(this, proyecto);
             this.remove(pMenuProyectos);
             this.add(pFin);
         }
