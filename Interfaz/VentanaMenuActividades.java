@@ -17,10 +17,11 @@ public class VentanaMenuActividades extends JFrame
     private PMenuActividades pMenuActividades;
     private PPausas pPausas;
     private Participante participante;
-    
+
     public final String CREAR = "CREAR";
     public final String MENU = "MENU";
     public final String PAUSAS = "PAUSAS";
+    public final String ESTADISTICAS = "ESTADISTICAS";
 
     public VentanaMenuActividades(MenuActividades menuActividades, Participante participante) 
     {

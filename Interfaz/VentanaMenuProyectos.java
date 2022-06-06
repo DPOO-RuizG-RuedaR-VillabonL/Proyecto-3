@@ -208,15 +208,6 @@ public class VentanaMenuProyectos extends JFrame{
         cambiarPanel(MENU);
     }
 
-     /*
-    public void ElegirParticipante(String boton) throws FileNotFoundException, IOException{
-        int num = Integer.parseInt(boton.replace("PARTICIPANTE ", ""));
-        menuActividades = new MenuActividades();
-        participante = menuActividades.elegirParticipante(proyecto, num);
-        cambiarPanel(MENU);
-        new VentanaMenuActividades(menuActividades, participante);
-    }*/
-
     private void elegirPaquete(String boton) throws FileNotFoundException, IOException {
         int num = Integer.parseInt(boton.replace("PAQUETE ", ""));
         menuTareas = new MenuTareas();

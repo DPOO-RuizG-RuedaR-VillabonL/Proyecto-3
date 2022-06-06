@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import Mundo.Actividades.Actividad;
 import Mundo.Actividades.Participante;
-import Mundo.Proyectos.Proyecto;
+import Mundo.Proyectos.Tarea;
 
 public class MenuActividades
 {
     Participante participante;
-    private ArrayList<String> tiposActividad;
 	
 	public boolean ejecutarCrearActividad(String titulo, String descripcion, String tipo, List<ArrayList<LocalTime>> listaTiempos, 
                                          List<ArrayList<LocalDate>> listaFechas, Participante participante)
@@ -21,11 +20,10 @@ public class MenuActividades
             return true;
 	}
 
-    public Participante elegirParticipante(Proyecto proyecto, int num)
+    public Participante elegirParticipante(Tarea tarea, int num)
     {   
-        this.tiposActividad = proyecto.getTiposActividad();
-        ArrayList<Participante> participantes = proyecto.getParticipantes();
-        Participante participante = participantes.get(num-1);
+        ArrayList<Participante> responsables = tarea.getResponsables();
+        Participante participante = responsables.get(num-1);
         this.participante = participante;
         return participante;
     }

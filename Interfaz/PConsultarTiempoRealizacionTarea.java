@@ -12,13 +12,11 @@ import Mundo.Proyectos.Tarea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 
 import javax.swing.*;
 
 public class PConsultarTiempoRealizacionTarea extends JPanel implements ActionListener{
-    private VentanaMenuProyectos ventanaMenuProyectos;
     private JPanel panelCentral;
     private JPanel panelAbajo;
     private Tarea tarea;
@@ -95,7 +93,7 @@ public class PConsultarTiempoRealizacionTarea extends JPanel implements ActionLi
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
         try {
-            ventanaMenuProyectos.cambiarPanel(comando);
+            ventanaMenuTareas.cambiarPanel(comando);
         } catch (IOException e2) {
             // TODO Auto-generated catch block
             e2.printStackTrace();

@@ -30,6 +30,7 @@ public class VentanaMenuPTrabajo extends JFrame{
     public final String AGREGAR_TAREA = "AGREGARPTAREA";
     public final String CONSULTAR_TAREA = "CONSULTARTAREA";
     public final String DESCRIPCIONPP = "DESCRIPCIONPP";
+    public final String MENUANTERIOR = "MENUANTERIOR";
     
 
     VentanaMenuPTrabajo (MenuTareas menuTareas, PaqueteTrabajo paquete) throws FileNotFoundException, IOException{
@@ -58,7 +59,10 @@ public class VentanaMenuPTrabajo extends JFrame{
                 this.remove(pAgregarTarea);
                 this.add(pMenuPProyectos);
 
-            }else if (comando == AGREGAR_TAREA){
+            }else if (comando== MENUANTERIOR){
+                this.setVisible(false);
+            }
+            else if (comando == AGREGAR_TAREA){
                 this.remove(pMenuPProyectos);
                 this.add(pAgregarTarea);
 
@@ -79,7 +83,7 @@ public class VentanaMenuPTrabajo extends JFrame{
 
         private void elegirTarea(String boton) throws FileNotFoundException, IOException {
             int num = Integer.parseInt(boton.replace("TAREA ", ""));
-            Tarea tarea = menuTareas.elegirTarea(paqueteTrabajo, num);
+            Tarea tarea = menuTareas.elegirTarea(num);
             cambiarPanel(MENU);
             new VentanaMenuTareas(menuTareas, tarea);
         }

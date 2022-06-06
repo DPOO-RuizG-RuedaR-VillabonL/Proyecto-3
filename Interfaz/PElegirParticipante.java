@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 
 public class PElegirParticipante extends JPanel implements ActionListener
 {
-    private VentanaMenuProyectos ventanaMenuProyectos;
+    private VentanaMenuTareas ventanaMenuTareas;
     ArrayList<Participante> participantes;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -30,9 +30,9 @@ public class PElegirParticipante extends JPanel implements ActionListener
     public final String MENU = "MENU"; 
     public final String GUARDAR = "GUARDAR";
 
-    public PElegirParticipante(VentanaMenuProyectos ventanaMenuProyectos, ArrayList<Participante> participantes) throws FileNotFoundException, IOException {
+    public PElegirParticipante(VentanaMenuTareas ventanaMenuTareas, ArrayList<Participante> participantes) throws FileNotFoundException, IOException {
         this.participantes = participantes;
-        this.ventanaMenuProyectos = ventanaMenuProyectos;
+        this.ventanaMenuTareas = ventanaMenuTareas;
         this.setBackground(new Color(02,28, 30) ); //fondo color principal
         this.setLayout(new BorderLayout());
   
@@ -85,7 +85,7 @@ public class PElegirParticipante extends JPanel implements ActionListener
         String comando = e.getActionCommand();
         try
         {
-            ventanaMenuProyectos.cambiarPanel(comando);
+            ventanaMenuTareas.cambiarPanel(comando);
         }
         catch (IOException e1) {
             // TODO Auto-generated catch block

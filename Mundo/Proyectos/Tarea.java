@@ -16,8 +16,9 @@ public class Tarea implements Serializable{
     private ArrayList<Participante> responsables;
     private double tiempoRealizacion;
     private boolean terminada;
+    private PaqueteTrabajo paqueteTrabajo;
 
-    public Tarea(String nombre, String descripcion, LocalDate fechaFinalEstimada, String tipo, ArrayList<Participante> responsables)
+    public Tarea(String nombre, String descripcion, LocalDate fechaFinalEstimada, String tipo, ArrayList<Participante> responsables, PaqueteTrabajo paqueteTrabajo)
     {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -27,6 +28,7 @@ public class Tarea implements Serializable{
         this.responsables = responsables;
         this.tiempoRealizacion = 0;
         this.terminada = false;
+        this.paqueteTrabajo = paqueteTrabajo;
 
     }
     
@@ -38,6 +40,10 @@ public class Tarea implements Serializable{
     public String getDescripcion()
     {
         return descripcion;
+    }
+    
+    public PaqueteTrabajo getPaqueteTrabajo() {
+        return paqueteTrabajo;
     }
 
     public LocalDate getFechaFinalEstimada() 

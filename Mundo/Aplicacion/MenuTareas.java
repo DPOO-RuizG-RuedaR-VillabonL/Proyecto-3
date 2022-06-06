@@ -28,7 +28,7 @@ public class MenuTareas
             LocalDate fechaFinalEstimada = LocalDate.parse(fechaFinalE, DateTimeFormatter.ISO_LOCAL_DATE );
             if ((fechaFinalEstimada.isBefore(finProyecto)|| fechaFinalEstimada.isEqual(finProyecto)) && (fechaFinalEstimada.isAfter(inicioProyecto)))
             {
-                Tarea nuevaTarea = new Tarea(nombre, descripcion, fechaFinalEstimada, tipoTarea, responsables);
+                Tarea nuevaTarea = new Tarea(nombre, descripcion, fechaFinalEstimada, tipoTarea, responsables, paqueteTrabajo);
                 this.tareas.add(nuevaTarea);
                 return true;
             }
@@ -71,7 +71,7 @@ public class MenuTareas
             ArrayList<String> tiposPermitidos = paqueteTrabajo.getProyecto().getTiposTarea();
             if (tiposPermitidos.contains(tipo)){
                 LocalDate fechaEstimada = LocalDate.parse(fecha, DateTimeFormatter.ISO_LOCAL_DATE );
-                Tarea nuevaTarea = new Tarea(nombre, descripcion, fechaEstimada, tipo, responsables );
+                Tarea nuevaTarea = new Tarea(nombre, descripcion, fechaEstimada, tipo, responsables, paqueteTrabajo);
                 paqueteTrabajo.agregarTarea(nuevaTarea);
                 this.tareas.add(nuevaTarea);
                 return true;
@@ -86,8 +86,10 @@ public class MenuTareas
         }
     }
 
-    public Tarea elegirTarea(PaqueteTrabajo paqueteTrabajo2, int num) {
-        return null;
+    public Tarea elegirTarea(int num) 
+    {
+        Tarea tarea = this.paqueteTrabajo.getTareas().get(num-1);
+        return tarea;
     }
 
 

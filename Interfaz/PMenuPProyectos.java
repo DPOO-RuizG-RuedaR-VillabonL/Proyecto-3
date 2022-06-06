@@ -33,6 +33,7 @@ public class PMenuPProyectos extends JPanel implements ActionListener
         public final String CONSULTAR_TAREA = "CONSULTARTAREA";
         public final String DESCRIPCIONPP = "DESCRIPCIONPP";
         public final String GUARDAR = "GUARDAR";
+        public final String MENUANTERIOR = "MENUANTERIOR";
         
         public PMenuPProyectos(VentanaMenuPTrabajo ventanaMenuPTrabajo, PaqueteTrabajo paquete) {
         this.ventanaMenuPTrabajo = ventanaMenuPTrabajo;
@@ -89,7 +90,7 @@ public class PMenuPProyectos extends JPanel implements ActionListener
         //Se crea panel sur y se le añade boton guardar
         panelAbajo = new JPanel();
         JButton btnMenu = new JButton("Menú Proyectos");
-        btnMenu.setActionCommand(MENU);
+        btnMenu.setActionCommand(MENUANTERIOR);
         btnMenu.addActionListener(this);
         panelAbajo.add(btnMenu);
         panelAbajo.setBorder(new EmptyBorder(50, 0, 50, 0));
