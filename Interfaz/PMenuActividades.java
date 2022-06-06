@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.border.*;
 import javax.swing.*;
 
-public class PGestorActividades extends JPanel implements ActionListener{
+public class PMenuActividades extends JPanel implements ActionListener{
     private VentanaMenuActividades ventanaMenuActividades;
     private JPanel panelCentral;
     private JPanel panelAbajo;
@@ -17,7 +17,7 @@ public class PGestorActividades extends JPanel implements ActionListener{
     public final String CREAR = "CREAR";
     public final String ESTADISTICAS = "ESTADISTICAS";
 
-    public PGestorActividades(VentanaMenuActividades ventanaMenuActividades) {
+    public PMenuActividades(VentanaMenuActividades ventanaMenuActividades) {
         this.ventanaMenuActividades= ventanaMenuActividades;
     
         this.setBackground(new Color(02,28, 30) ); //fondo color principal

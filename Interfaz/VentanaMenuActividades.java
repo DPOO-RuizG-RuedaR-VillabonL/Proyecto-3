@@ -12,7 +12,7 @@ public class VentanaMenuActividades extends JFrame
 {
     public MenuActividades menuActividades;
     private PCrearActividad pCrearActividad;
-    private PGestorActividades pMenuActividades;
+    private PMenuActividades pMenuActividades;
     private PPausas pPausas;
     private Participante participante;
     public final String CREAR = "CREAR";
@@ -25,7 +25,7 @@ public class VentanaMenuActividades extends JFrame
         this.menuActividades = menuActividades;
         this.participante = participante;
         pCrearActividad = new PCrearActividad(this);
-        pMenuActividades = new PGestorActividades(this);
+        pMenuActividades = new PMenuActividades(this);
         pPausas = new PPausas(this);
         
         setTitle("Menu Actividades");
